@@ -1,14 +1,22 @@
 import { expect } from 'chai';
 import Trip from '../src/Trip';
-const data = require('../src/data/tripTestData');
+import Destination from '../src/Destination';
+const tripData = require('../src/data/tripTestData');
+const destinationData = require('../src/data/destinationTestData');
+
 
 describe('Trip', () => {
 
-  let trip, trip2;
+  let trip, trip2, trip3;
+  let destination, destination2;
 
   beforeEach(() => {
-    trip = new Trip(data[0]);
-    trip2 = new Trip(data[1]);
+    trip = new Trip(tripData[0]);
+    trip2 = new Trip(tripData[1]);
+    trip3 = new Trip(tripData[2]);
+    location = new Destination(destinationData[0]);
+    trip.destination = location;
+    trip2.destination = location;
   });
 
   it.skip('Should be a function', () => {
@@ -50,5 +58,21 @@ describe('Trip', () => {
 
   it.skip('Should store suggested activities for the trip', () => {
     expect(trip.suggestedActivities).to.deep.equal([]);
+  });
+
+  it.skip('Should have a default destination of null', () => {
+    expect(trip3.destination).to.equal(null);
+  })
+
+  it.skip('Should store a Destination object', () => {
+    expect(trip.destination).to.equal(location);
+  })
+
+  it.skip('Should be able to return the total amount for the trip', () => {
+    const total1 = trip.calculateTotalFare();
+    const total2 = trip2.calculateTotalFare();
+
+    expect(total1).to.equal(1056);
+    expect(total2).to.equal(14190);
   });
 });
