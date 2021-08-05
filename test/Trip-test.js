@@ -9,66 +9,74 @@ describe('Trip', () => {
 
   let trip, trip2, trip3;
   let destination, destination2;
+  let location, location2;
 
   beforeEach(() => {
     trip = new Trip(tripData[0]);
     trip2 = new Trip(tripData[1]);
     trip3 = new Trip(tripData[2]);
     location = new Destination(destinationData[0]);
-    trip.destination = location;
+    location2 = new Destination(destinationData[1]);
     trip2.destination = location;
   });
 
-  it.skip('Should be a function', () => {
+  it('Should be a function', () => {
     expect(Trip).to.be.a('function');
   });
 
-  it.skip('Should be an instance of Trip', () => {
+  it('Should be an instance of Trip', () => {
     expect(trip).to.be.an.instanceOf(Trip);
   });
 
-  it.skip('Should have an ID', () => {
+  it('Should have an ID', () => {
     expect(trip.id).to.equal(1);
   });
 
-  it.skip('Should hold the user\'s ID', () => {
-    expect(trip.userID).to.equal(44);
+  it('Should hold the user\'s ID', () => {
+    expect(trip.userID).to.equal(1);
   });
 
-  it.skip('Should hold the destination\'s ID', () => {
+  it('Should hold the destination\'s ID', () => {
     expect(trip.destinationID).to.equal(49);
   });
 
-  it.skip('Should hold the number of travelers', () => {
+  it('Should hold the number of travelers', () => {
     expect(trip.travelers).to.equal(1);
   });
 
-  it.skip('Should hold the departure date', () = {
+  it('Should hold the departure date', () => {
     expect(trip.date).to.equal('2022/09/16');
   });
 
-  it.skip('Should hold the trip duration in days', () => {
+  it('Should hold the trip duration in days', () => {
     expect(trip.duration).to.equal(8);
   });
 
-  it.skip('Should hold the approval status of the trip', () => {
+  it('Should hold the approval status of the trip', () => {
     expect(trip.status).to.equal('approved');
     expect(trip2.status).to.equal('pending');
   });
 
-  it.skip('Should store suggested activities for the trip', () => {
+  it('Should store suggested activities for the trip', () => {
     expect(trip.suggestedActivities).to.deep.equal([]);
   });
 
-  it.skip('Should have a default destination of null', () => {
+  it('Should have a default destination of null', () => {
     expect(trip3.destination).to.equal(null);
-  })
+  });
 
-  it.skip('Should store a Destination object', () => {
+  it('Should be able to add a Destination object', () => {
+    trip.updateDestination(location);
+    trip2.updateDestination(location2);
+
     expect(trip.destination).to.equal(location);
-  })
+    expect(trip2.destination).to.equal(location2);
+  });
 
-  it.skip('Should be able to return the total amount for the trip', () => {
+  it('Should be able to return the total amount for the trip', () => {
+    trip.updateDestination(location);
+    trip2.updateDestination(location2);
+
     const total1 = trip.calculateTotalFare();
     const total2 = trip2.calculateTotalFare();
 
