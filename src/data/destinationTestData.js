@@ -1,6 +1,6 @@
 const destinationTestData = [
   {
-    "id": 1,
+    "id": 49,
     "destination": "Lima, Peru",
     "estimatedLodgingCostPerDay": 70,
     "estimatedFlightCostPerPerson": 400,
@@ -8,7 +8,7 @@ const destinationTestData = [
     "alt": "overview of city buildings with a clear sky"
   },
   {
-    "id": 2,
+    "id": 25,
     "destination": "Stockholm, Sweden",
     "estimatedLodgingCostPerDay": 100,
     "estimatedFlightCostPerPerson": 780,
@@ -96,4 +96,4 @@ const destinationTestData = [
   }
 ];
 
-export default destinationTestData;
+module.exports = destinationTestData;
