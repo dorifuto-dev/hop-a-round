@@ -61,4 +61,4 @@ const travelerTestData = [
   }
 ];
 
-export default travelerTestData;
+module.exports = travelerTestData;
