@@ -8,65 +8,73 @@ const destinationData = require('../src/data/destinationTestData');
 
 describe('Traveler', () => {
 
-  let traveler;
+  let traveler, traveler2;
   let trip;
   let destination;
 
   beforeEach(() => {
     traveler = new Traveler(userData[0]);
+    traveler2 = new Traveler(userData[1]);
     trip = new Trip(tripData[0]);
     destination = new Destination(destinationData[0]);
-    trip.destination = destination;
+    trip.updateDestination(destination);
   });
 
-  it.skip('Should be a function', () => {
+  it('Should be a function', () => {
     expect(Traveler).to.be.a('function');
   });
 
-  it.skip('Should be an instance of Traveler', () => {
+  it('Should be an instance of Traveler', () => {
     expect(traveler).to.be.an.instanceOf(Traveler);
   });
 
-  it.skip('Should have an id', () => {
+  it('Should have an id', () => {
     expect(traveler.userID).to.equal(1);
   });
 
-  it.skip('Should have a name', () => {
+  it('Should have a name', () => {
     expect(traveler.name).to.equal('Ham Leadbeater');
   });
 
-  it.skip('Should have a type', () => {
+  it('Should have a type', () => {
     expect(traveler.type).to.equal('relaxer');
   });
 
-  it.skip('Should hold onto a user\'s trips', () => {
+  it('Should hold onto a user\'s trips', () => {
     expect(traveler.trips).to.deep.equal([]);
   });
-// Add Property this.isLoggedIn?
-  it.skip('Should be able to log in', () => {
-    expect(traveler.login('travel')).to.equal(true);
-    expect(traveler.login('manatee')).to.equal(false);
+
+  it('Should have a property isLoggedIn which defaults to false', () => {
+    expect(traveler.isLoggedIn).to.equal(false);
   });
 
-  it.skip('Should be able to update it\'s list of trips', () = {
+  it('Should be able to log in', () => {
+    expect(traveler.login('travel')).to.equal(true);
+    expect(traveler.isLoggedIn).to.equal(true);
+
+    expect(traveler2.login('manatee')).to.equal(false);
+    expect(traveler2.isLoggedIn).to.equal(false);
+  });
+
+  it('Should be able to update it\'s list of trips', () => {
     traveler.addTrip(trip);
 
     expect(traveler.trips.length).to.equal(1);
     expect(traveler.trips).to.deep.equal([trip]);
   });
 
-  it.skip('Should be able to find the total amount spent on trips', () => {
-    const total = traveler.findTotalSpent();
-    // Should take in an argument of Year, Date, etc.
-
-    expect(total).to.equal(null);
+  it('Should be able to find the total amount spent on trips', () => {
+    const total1 = traveler.findTotalSpent();
 
     traveler.addTrip(trip);
-    // Try using REDUCE method
-    expect(total).to.equal(1056);
+
+    const total2 = traveler.findTotalSpent();
+
+    expect(total1).to.equal(null);
+    expect(total2).to.equal(1056);
   });
 
-  it.skip('Should be able to return the user\'s first name', () => {
+  it('Should be able to return the user\'s first name', () => {
     const name = traveler.getFirstName();
 
     expect(name).to.equal('Ham');
