@@ -1,7 +1,7 @@
 const tripTestData = [
   {
     "id": 1,
-    "userID": 44,
+    "userID": 1,
     "destinationID": 49,
     "travelers": 1,
     "date": "2022/09/16",
