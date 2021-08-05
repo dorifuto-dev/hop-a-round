@@ -121,4 +121,4 @@ const tripTestData = [
   }
 ];
 
-export default tripTestData;
+module.exports = tripTestData;
