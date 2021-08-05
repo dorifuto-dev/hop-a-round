@@ -8,3 +8,11 @@ import './css/base.scss';
 import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
+
+// After GETting data, store in global variables
+
+// (tripData [x],
+// destinationData [x] (needs to display list of destinations to choose),
+// traveler [x])
+
+// use day.js for date input
