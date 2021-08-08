@@ -1,7 +1,134 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+// ;
+* {
+  font-family: 'Open Sans', sans-serif;
+  // border: 1px dotted lime;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+
 
 body {
-  background: $primary-background;
+  // background: $primary-background;
+}
+
+.top-menu {
+  height: 15vh;
+  background-color: #0288D1;
+  display: flex;
+}
+
+.logo-section {
+  height: 100%;
+  display: flex;
+}
+
+.logo {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.logo-hop-a-round {
+  font-family: 'Aleo', serif;
+  color: #ffffff;
+}
+
+.user-menu {
+  margin-left: auto;
+  display: flex;
+  height: 100%;
+}
+
+.user-trips, .new-trip, .login, .sign-out {
+  height: 100%;
+  display: flex;
+  margin-right: 10px;
+  // justify-content: flex-end;
+
+}
+
+.login-button, .user-trips-button, .user-new-trips-button, .sign-out-button {
+  font-size: 20px;
+  margin-top: auto;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+main {
+  background-color: #B3E5FC;
+  height: 85vh;
+  overflow: auto;
+  // display: flex;
+  // justify-content: center;
+}
+
+.user-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 10px 15px;
+}
+
+.button-group button {
+  float: left;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.button-group button:not(:last-child) {
+  border-right: none;
+}
+
+.button-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.user-display-grid {
+  margin: 10px 15px 10px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 8px;
+}
+
+.trip-card {
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.4);
+  height: 25em;
+  width: 20em;
+  background-color: #efefef;
+  color: #212121;
+}
+
+.trip-preview {
+  width: 100%;
+  height: 40%;
+}
+
+.trip-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.trip-info {
+  height: 60%;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hide {
+  display: none!important;
 }
