@@ -1,15 +1,43 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
-var slides = document.querySelectorAll(".slide");
+const slides = document.querySelectorAll(".slide");
+
+// DUMMY NAV - REORGANIZE
+const loginBtn = document.querySelector(".login");
+const userTripsBtn = document.querySelector(".user-trips");
+const newTripBtn = document.querySelector(".new-trip");
+const signOutBtn = document.querySelector(".sign-out");
+const defaultDisplay = document.querySelector(".default-display");
+const userDisplay = document.querySelector(".user-display");
+
+loginBtn.addEventListener("click", () => {
+  showUserDisplay();
+});
+
+signOutBtn.addEventListener("click", () => {
+  showDefaultPage();
+})
+
+const showUserDisplay = () => {
+  defaultDisplay.classList.add("hide")
+  userDisplay.classList.remove("hide");
+  signOutBtn.classList.remove("hide");
+  userTripsBtn.classList.remove("hide");
+  newTripBtn.classList.remove("hide");
+}
+
+const showDefaultPage = () => {
+  defaultDisplay.classList.remove("hide")
+  userDisplay.classList.add("hide");
+  signOutBtn.classList.add("hide");
+  userTripsBtn.classList.add("hide");
+  newTripBtn.classList.add("hide");
+}
 
 var slideIndex = 0;
 
-
-
 const showSlides = () => {
-  // slides.forEach(slide => {
-  //   slide.style.display = "none";
-  // })
+  // slides.forEach(slide => slide.classList.add("hide"))
   for (var i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
@@ -19,7 +47,6 @@ const showSlides = () => {
   }
   slides[slideIndex - 1].style.display = "block";
   setTimeout(showSlides, 5000);
-
 }
 
 showSlides();
