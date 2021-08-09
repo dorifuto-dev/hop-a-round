@@ -10,4 +10,23 @@ const fetchAPIData = (type, id) => {
   }
 }
 
-export { fetchAPIData };
+const postNewTrip = (tripObject) => {
+  fetch("http://localhost:3001/api/v1/trips", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(tripObject)
+  })
+    .then(response => checkForError(response))
+    .catch(error => console.log(error))
+}
+
+const checkForError = (response) => {
+  if (!response.ok) {
+    error.forEach(error => error.innerText = "Please make sure that all fields are filled out.");
+    throw new Error("Please make sure that all fields are filled out.");
+  } else {
+    return response.json()
+  }
+}
+
+export { fetchAPIData, postNewTrip };
