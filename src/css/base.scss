@@ -1,7 +1,389 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+// ;
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  // border: 1px dotted lime;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
 
 body {
-  background: $primary-background;
+  // background: $primary-background;
+}
+
+.top-menu {
+  height: 100px;
+  background-color: #0288D1;
+  display: flex;
+}
+
+.logo-section {
+  height: 100%;
+  display: flex;
+}
+
+.logo {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.logo-hop-a-round {
+  font-family: 'Aleo', serif;
+  color: #ffffff;
+}
+
+.user-menu {
+  margin-left: auto;
+  display: flex;
+  height: 100%;
+}
+
+.user-trips, .new-trip, .login, .sign-out {
+  height: 100%;
+  display: flex;
+  margin-right: 10px;
+}
+
+.login-button, .user-trips-button, .user-new-trips-button, .sign-out-button {
+  font-size: 20px;
+  margin-top: auto;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.hide {
+  display: none!important;
+}
+
+main {
+  background-color: #B3E5FC;
+  height: 90vh;
+  overflow: auto;
+}
+
+.default-display {
+  @include flex-column-center;
+}
+
+// LOGIN MicroModal
+
+.login-modal {
+  z-index: 10;
+}
+
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal-container {
+  background-color: #fff;
+  padding: 30px 100px;
+  max-width: 500px;
+  max-height: 100vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.login-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-modal-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: #00449e;
+  box-sizing: border-box;
+}
+
+.login-modal-close {
+  background: transparent;
+  border: 0;
+}
+
+.login-modal-header .login-modal-close:before { content: "\2715"; }
+
+.login-modal-content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: rgba(0,0,0,.8);
+  height: 100%;
+
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-between;
+  // height: 15em;
+}
+
+.login-modal-btn {
+  font-size: .875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  background-color: #e6e6e6;
+  color: rgba(0,0,0,.8);
+  border-radius: .25rem;
+  border-style: none;
+  border-width: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+  text-transform: none;
+  overflow: visible;
+  line-height: 1.15;
+  margin: 0;
+  will-change: transform;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform .25s ease-out;
+  transition: transform .25s ease-out;
+  transition: transform .25s ease-out,-webkit-transform .25s ease-out;
+}
+
+.login-modal-btn:focus, .login-modal-btn:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.login-modal-btn-primary {
+  background-color: #00449e;
+  color: #fff;
+}
+
+@keyframes mmfadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes mmfadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+
+@keyframes mmslideIn {
+  from { transform: translateY(15%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes mmslideOut {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10%); }
+}
+
+.micromodal-slide {
+  display: none;
+}
+
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .login-modal-overlay {
+  animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .login-modal-container {
+  animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .login-modal-overlay {
+  animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .login-modal-container {
+  animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal-slide .login-modal-container,
+.micromodal-slide .login-modal-overlay {
+  will-change: transform;
+}
+
+.slogan-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 15px;
+  color: #212121;
+}
+
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+
+.slide {
+  display: none;
+  background-color: black;
+}
+
+.slide-image {
+  width: 100vw;
+  height: 45em;
+  object-fit: cover;
+  opacity: 70%;
+}
+
+.slide-caption {
+  color: #f2f2f2;
+  font-size: 50px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.starting-price {
+  color: #f2f2f2;
+  font-size: 45px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 30px;
+  font-weight: 200;
+}
+
+.slide-number {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 2s;
+  animation-name: fade;
+  animation-duration: 2s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .6}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .6}
+  to {opacity: 1}
+}
+
+
+.user-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 10px 15px;
+}
+
+.button-group button {
+  float: left;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.button-group button:not(:last-child) {
+  border-right: none;
+}
+
+.button-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.user-display-grid {
+  margin: 10px 15px 10px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 8px;
+}
+
+.trip-card {
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.4);
+  height: 25em;
+  width: 20em;
+  background-color: #efefef;
+  color: #212121;
+}
+
+.trip-preview {
+  width: 100%;
+  height: 40%;
+}
+
+.trip-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.trip-info {
+  height: 60%;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.new-trip-page {
+  @include flex-column-center;
+}
+
+.new-trip-box {
+  height: 30em;
+  width: 40vw;
+  background-color: #efefef;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.4);
+  border-radius: 5px;
+}
+
+.new-trip-form {
+  @include flex-column-center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.form-selections {
+  display: flex;
+}
+
+.form-left, .form-right {
+  @include flex-column-center;
 }

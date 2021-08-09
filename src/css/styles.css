@@ -1,0 +1,12 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+  border: 1px dotted lime;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
