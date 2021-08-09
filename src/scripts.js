@@ -1,6 +1,10 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
+import "./images/plane.svg";
+import "./css/base.scss";
 import MicroModal from "micromodal";
+import Traveler from "./Traveler";
+import { fetchAPIData, postNewTrip } from "./api-Calls";
 
 MicroModal.init();
 
@@ -13,6 +17,41 @@ const newTripBtn = document.querySelector(".new-trip");
 const signOutBtn = document.querySelector(".sign-out");
 const defaultDisplay = document.querySelector(".default-display");
 const userDisplay = document.querySelector(".user-display");
+const loginForm = document.getElementById("loginForm");
+const loginError = document.getElementById("loginError");
+
+
+loginForm.addEventListener("submit", (event) => {
+  getLoginData(event);
+})
+const checkHasNumber = (string) => {
+  return /\d/.test(string);
+}
+
+const clearError = () => {
+  loginError.innerHTML = "";
+}
+
+const getLoginData = (event) => {
+  // debugger
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const password = formData.get('password');
+  const username = formData.get('username');
+  let userID;
+  // = username.match(/\d+/g)[0];
+  // console.log(username);
+  if (checkHasNumber(username) && password === "travel") {
+    userID = username.match(/\d+/g)[0];
+    console.log(userID);
+    getUser(userID);
+  } else {
+    loginError.innerHTML = "Incorrect username or password. Please try again.";
+    setTimeout(clearError, 5000)
+  }
+  event.target.reset();
+}
+
 
 // loginBtn.addEventListener("click", () => {
 //   showUserDisplay();
@@ -38,15 +77,18 @@ const userDisplay = document.querySelector(".user-display");
 //   newTripBtn.classList.add("hide");
 // }
 
+const getUser = (id) => {
+  fetchAPIData("travelers", id)
+  .then(data => new Traveler(data))
+  .then(data => console.log(data))
+}
 
+// SLIDESHOW
 
 var slideIndex = 0;
 
 const showSlides = () => {
-  // slides.forEach(slide => slide.classList.add("hide"))
-  for (var i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
+  slides.forEach(slide => slide.style.display ="none")
   slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1;
@@ -57,10 +99,8 @@ const showSlides = () => {
 
 showSlides();
 // An example of how you tell webpack to use a CSS (SCSS) file
-import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
 
 
 

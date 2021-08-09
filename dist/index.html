@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../src/css/base.scss">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
@@ -11,27 +10,27 @@
   <title>HopAround Travel</title>
 </head>
 <body>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
   <nav class="top-menu">
     <section class="logo-section">
       <div class="logo">
         <h2 class="logo-hop-a-round">HopAround</h2>
-        <img class="plane-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Plane_font_awesome.svg/1200px-Plane_font_awesome.svg.png" height="20px" alt="Plane Image">
+        <img class="plane-img" src="./images/plane.svg" height="30px" alt="Plane Image">
       </div>
     </section>
-    <li class="user-menu">
-      <ul class="login" tabindex="1">
+    <ul class="user-menu">
+      <li class="login" tabindex="1">
         <p data-micromodal-trigger="loginModal" class="login-button">Login</p>
-      </ul>
-      <ul class="user-trips hide">
+      </li>
+      <li class="user-trips hide">
         <p class="user-trips-button">All Trips</p>
-      </ul>
-      <ul class="new-trip hide">
+      </li>
+      <li class="new-trip hide">
         <p class="user-new-trips-button">New Trip</p>
-      </ul>
-      <ul class="sign-out hide">
+      </li>
+      <li class="sign-out hide">
         <p class="sign-out-button">Sign Out</p>
-      </ul>
+      </li>
+    </ul>
   </nav>
   <main>
     <section class="default-display">
@@ -43,13 +42,14 @@
               <button class="login-modal-close" aria-label="Close loginModal" data-micromodal-close></button>
             </header>
             <div class="login-modal-content" id="loginModalContent">
-              <form class="login-form">
+              <form class="login-form" id="loginForm">
                 <label for "username" class="username-label">Username</label>
                 <input class="username-input" id="userNameInput" name="username" type="text" required>
                 <label for "password" class="password-label">Password</label>
                 <input class="password-input" id="passwordInput" name="password" type="password" required>
                 <input class="login-submit" id="loginSubmit" type="submit" value="Sign In"/>
               </form>
+              <div class="login-error" id="loginError"></div>
             </div>
           </div>
         </div>
@@ -88,8 +88,6 @@
           <div class="slide-caption">Tulum, Mexico</div>
           <div class="starting-price">Starting from $495</div>
         </div>
-        <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
       </div>
     </section>
     <section class="user-display hide">
@@ -186,6 +184,5 @@
   </main>
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
