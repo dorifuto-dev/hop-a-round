@@ -21,7 +21,7 @@
     </section>
     <li class="user-menu">
       <ul class="login" tabindex="1">
-        <p class="login-button">Login</p>
+        <p data-micromodal-trigger="loginModal" class="login-button">Login</p>
       </ul>
       <ul class="user-trips hide">
         <p class="user-trips-button">All Trips</p>
@@ -34,7 +34,26 @@
       </ul>
   </nav>
   <main>
-    <section class="default-display hide">
+    <section class="default-display">
+      <div class="login-modal micromodal-slide" id="loginModal" aria-hidden="true">
+        <div class="login-modal-overlay" tabindex="-1" data-micromodal-close>
+          <div class="login-modal-container" role="dialog" aria-modal="true" aria-labelledby="loginModal-title">
+            <header class="login-modal-header">
+              <h2 class="login-modal-title" id="loginModalTitle">User Login</h2>
+              <button class="login-modal-close" aria-label="Close loginModal" data-micromodal-close></button>
+            </header>
+            <div class="login-modal-content" id="loginModalContent">
+              <form class="login-form">
+                <label for "username" class="username-label">Username</label>
+                <input class="username-input" id="userNameInput" name="username" type="text" required>
+                <label for "password" class="password-label">Password</label>
+                <input class="password-input" id="passwordInput" name="password" type="password" required>
+                <input class="login-submit" id="loginSubmit" type="submit" value="Sign In"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="slogan-container">
         <h3 class="slogan">Getting there is half the fun. Book your next trip with HopAround™!</h3>
       </div>
@@ -94,6 +113,7 @@
             <h3 class="destination-name">Wellington, New Zealand</h3>
             <p class="departure-date">11/17/22</p>
             <p class="number-of-travelers">4 travelers</p>
+            <p class="trip-status">Approved</p>
             <p class="trip-cost">$2250</p>
           </div>
         </article>
@@ -105,6 +125,7 @@
             <h3 class="destination-name">Wellington, New Zealand</h3>
             <p class="departure-date">11/17/22</p>
             <p class="number-of-travelers">4 travelers</p>
+            <p class="trip-status">Approved</p>
             <p class="trip-cost">$2250</p>
           </div>
         </article>
@@ -116,6 +137,7 @@
             <h3 class="destination-name">Wellington, New Zealand</h3>
             <p class="departure-date">11/17/22</p>
             <p class="number-of-travelers">4 travelers</p>
+            <p class="trip-status">Approved</p>
             <p class="trip-cost">$2250</p>
           </div>
         </article>
@@ -127,29 +149,39 @@
             <h3 class="destination-name">Wellington, New Zealand</h3>
             <p class="departure-date">11/17/22</p>
             <p class="number-of-travelers">4 travelers</p>
+            <p class="trip-status">Approved</p>
             <p class="trip-cost">$2250</p>
           </div>
         </article>
       </section>
     </section>
-    <section class="new-trip-page">
-      <form class="new-trip-form">
-        <label for "cars">Where to?</label>
-        <select id="destinations" name="destination" required>
-          <option value="Tokyo, Japan">Tokyo, Japan</option>
-          <option value="Lima, Peru">Lima, Peru</option>
-          <option value="Rome, Italy">Rome, Italy</option>
-          <option value="Miami, Florida">Miami, Florida</option>
-          <option value="Tulum, Mexico">Tulum, Mexico</option>
-        </select>
-        <label for "departure-date">When?</label>
-        <input name="departure-date" type="date" id="departureDate" required>
-        <label for "duration">How many days?</label>
-        <input name="duration" type="number" min="0" placeholder="0" required>
-        <label for "travelers">How many travelers?</label>
-        <input name="travelers" type="number" min="0" placeholder="0" required>
-        <input type="submit" value="Submit Trip Request"/>
-      </form>
+    <section class="new-trip-page hide">
+      <h3 class="new-trip-title">New Trip</h3>
+      <div class="new-trip-box">
+        <form class="new-trip-form">
+          <div class="form-selections">
+            <div class="form-left">
+              <label for "cars">Where to?</label>
+              <select id="destinations" name="destination" required>
+                <option value="Tokyo, Japan">Tokyo, Japan</option>
+                <option value="Lima, Peru">Lima, Peru</option>
+                <option value="Rome, Italy">Rome, Italy</option>
+                <option value="Miami, Florida">Miami, Florida</option>
+                <option value="Tulum, Mexico">Tulum, Mexico</option>
+              </select>
+              <label for "departure-date">When?</label>
+              <input name="departure-date" type="date" id="departureDate" required>
+            </div>
+            <div class="form-right">
+              <label for "duration">How many days?</label>
+              <input name="duration" type="number" min="0" placeholder="0" required>
+              <label for "travelers">How many travelers?</label>
+              <input name="travelers" type="number" min="0" placeholder="0" required>
+            </div>
+          </div>
+          <input type="submit" value="Submit Trip Request"/>
+        </form>
+      </div>
     </section>
   </main>
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

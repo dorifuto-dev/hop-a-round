@@ -1,5 +1,9 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
+import MicroModal from "micromodal";
+
+MicroModal.init();
+
 const slides = document.querySelectorAll(".slide");
 
 // DUMMY NAV - REORGANIZE
@@ -10,29 +14,31 @@ const signOutBtn = document.querySelector(".sign-out");
 const defaultDisplay = document.querySelector(".default-display");
 const userDisplay = document.querySelector(".user-display");
 
-loginBtn.addEventListener("click", () => {
-  showUserDisplay();
-});
+// loginBtn.addEventListener("click", () => {
+//   showUserDisplay();
+// });
+//
+// signOutBtn.addEventListener("click", () => {
+//   showDefaultPage();
+// })
+//
+// const showUserDisplay = () => {
+//   defaultDisplay.classList.add("hide")
+//   userDisplay.classList.remove("hide");
+//   signOutBtn.classList.remove("hide");
+//   userTripsBtn.classList.remove("hide");
+//   newTripBtn.classList.remove("hide");
+// }
+//
+// const showDefaultPage = () => {
+//   defaultDisplay.classList.remove("hide")
+//   userDisplay.classList.add("hide");
+//   signOutBtn.classList.add("hide");
+//   userTripsBtn.classList.add("hide");
+//   newTripBtn.classList.add("hide");
+// }
 
-signOutBtn.addEventListener("click", () => {
-  showDefaultPage();
-})
 
-const showUserDisplay = () => {
-  defaultDisplay.classList.add("hide")
-  userDisplay.classList.remove("hide");
-  signOutBtn.classList.remove("hide");
-  userTripsBtn.classList.remove("hide");
-  newTripBtn.classList.remove("hide");
-}
-
-const showDefaultPage = () => {
-  defaultDisplay.classList.remove("hide")
-  userDisplay.classList.add("hide");
-  signOutBtn.classList.add("hide");
-  userTripsBtn.classList.add("hide");
-  newTripBtn.classList.add("hide");
-}
 
 var slideIndex = 0;
 
@@ -46,7 +52,7 @@ const showSlides = () => {
     slideIndex = 1;
   }
   slides[slideIndex - 1].style.display = "block";
-  setTimeout(showSlides, 5000);
+  setTimeout(showSlides, 10000);
 }
 
 showSlides();
