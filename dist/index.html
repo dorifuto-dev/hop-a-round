@@ -20,7 +20,7 @@
       </div>
     </section>
     <li class="user-menu">
-      <ul class="login">
+      <ul class="login" tabindex="1">
         <p class="login-button">Login</p>
       </ul>
       <ul class="user-trips hide">
@@ -34,40 +34,40 @@
       </ul>
   </nav>
   <main>
-    <section class="default-display">
+    <section class="default-display hide">
       <div class="slogan-container">
-        <h3 class="slogan">Getting there is half the fun. Book your next trip with HopAround!</h3>
+        <h3 class="slogan">Getting there is half the fun. Book your next trip with HopAround™!</h3>
       </div>
       <div class="slideshow-container">
         <div class="slide fade">
           <div class="slide-number">1 / 5</div>
           <img class="slide-image" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1971&q=80" alt="Tokyo Image">
           <div class="slide-caption">Tokyo, Japan</div>
-          <div class="starting-price">Starting from $1238*</div>
+          <div class="starting-price">Starting from $1238</div>
         </div>
         <div class="slide fade">
           <div class="slide-number">2 / 5</div>
           <img class="slide-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="Lima Image">
           <div class="slide-caption">Lima, Peru</div>
-          <div class="starting-price">Starting from $517*</div>
+          <div class="starting-price">Starting from $517</div>
         </div>
         <div class="slide fade">
           <div class="slide-number">3 / 5</div>
           <img class="slide-image" src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="Rome Image">
           <div class="slide-caption">Rome, Italy</div>
-          <div class="starting-price">Starting from $814*</div>
+          <div class="starting-price">Starting from $814</div>
         </div>
         <div class="slide fade">
           <div class="slide-number">4 / 5</div>
           <img class="slide-image" src="https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80" alt="Miami Image">
           <div class="slide-caption">Miami, Florida</div>
-          <div class="starting-price">Starting from $476*</div>
+          <div class="starting-price">Starting from $476</div>
         </div>
         <div class="slide fade">
           <div class="slide-number">5 / 5</div>
           <img class="slide-image" src="https://images.unsplash.com/photo-1501619593928-bef49688c888?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="Tulum Image">
           <div class="slide-caption">Tulum, Mexico</div>
-          <div class="starting-price">Starting from $495*</div>
+          <div class="starting-price">Starting from $495</div>
         </div>
         <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
@@ -131,6 +131,25 @@
           </div>
         </article>
       </section>
+    </section>
+    <section class="new-trip-page">
+      <form class="new-trip-form">
+        <label for "cars">Where to?</label>
+        <select id="destinations" name="destination" required>
+          <option value="Tokyo, Japan">Tokyo, Japan</option>
+          <option value="Lima, Peru">Lima, Peru</option>
+          <option value="Rome, Italy">Rome, Italy</option>
+          <option value="Miami, Florida">Miami, Florida</option>
+          <option value="Tulum, Mexico">Tulum, Mexico</option>
+        </select>
+        <label for "departure-date">When?</label>
+        <input name="departure-date" type="date" id="departureDate" required>
+        <label for "duration">How many days?</label>
+        <input name="duration" type="number" min="0" placeholder="0" required>
+        <label for "travelers">How many travelers?</label>
+        <input name="travelers" type="number" min="0" placeholder="0" required>
+        <input type="submit" value="Submit Trip Request"/>
+      </form>
     </section>
   </main>
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
