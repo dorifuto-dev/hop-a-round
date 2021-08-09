@@ -21,7 +21,7 @@ body {
 }
 
 .top-menu {
-  height: 15vh;
+  height: 100px;
   background-color: #0288D1;
   display: flex;
 }
@@ -67,10 +67,99 @@ body {
 
 main {
   background-color: #B3E5FC;
-  height: 85vh;
+  height: 90vh;
   overflow: auto;
   // display: flex;
   // justify-content: center;
+}
+
+.default-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+
+.slide {
+  display: none;
+  background-color: black;
+}
+
+.slide-image {
+  width: 100vw;
+  height: 45em;
+  object-fit: cover;
+  opacity: 70%;
+}
+
+// .prev, .next {
+//   cursor: pointer;
+//   position: absolute;
+//   top: 50%;
+//   width: auto;
+//   margin-top: -22px;
+//   padding: 16px;
+//   color: white;
+//   font-weight: 700;
+//   font-size: 18px;
+//   transition: 0.6s ease;
+//   border-radius: 0 3px 3px 0;
+//   user-select: none;
+// }
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slide-caption {
+  color: #f2f2f2;
+  font-size: 50px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.slide-number {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.slogan-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 10px;
+  color: #212121;
 }
 
 .user-nav {
