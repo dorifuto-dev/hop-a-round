@@ -1,5 +1,3 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
 import "./images/plane.svg";
 import "./css/base.scss";
 import MicroModal from "micromodal";
@@ -10,44 +8,40 @@ import domUpdateFunctions from "./domFunctions";
 
 MicroModal.init();
 
-// {openTrigger : 'data-micromodal-trigger', closeTrigger: "data-micromodal-close"}
-
-// DUMMY NAV - REORGANIZE
-// const loginBtn = document.querySelector(".login");
-// const userTripsBtn = document.querySelector(".user-trips");
-// const newTripBtn = document.querySelector(".new-trip");
-// const defaultDisplay = document.querySelector(".default-display");
-// const userDisplay = document.querySelector(".user-display");
-// const loginError = document.getElementById("loginError");
 const slides = document.querySelectorAll(".slide");
 const signOutBtn = document.querySelector(".sign-out");
 const loginForm = document.getElementById("loginForm");
+const newTripBtn = document.getElementById("newTripBtn");
 
-let allTripData;
+// let allTripData;
 let user;
-let allDestinationData;
+// let allDestinationData;
+window.addEventListener("load", () => {
+  // populateDestinationsInput();
+})
 
 loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
 })
 
 signOutBtn.addEventListener("click", (event) => {
-  domUpdateFunctions.toggleUserDefaultPage();
+  domUpdateFunctions.backToMainPage();
   MicroModal.close();
+})
+
+newTripBtn.addEventListener("click", (event) => {
+  domUpdateFunctions.showNewTripPage();
 })
 
 const checkHasNumber = (string) => {
   return /\d/.test(string);
 }
 
-// const checkProperFormat = (string) => {
-//   if (string)
-// }
+const populateDestinationsInput = () => {
 
-
+}
 
 const getLoginData = (event) => {
-  // debugger
   event.preventDefault();
   const formData = new FormData(event.target);
   const password = formData.get('password');
@@ -55,9 +49,6 @@ const getLoginData = (event) => {
   let userID;
   if (checkHasNumber(username) && username.includes("traveler") && password === "travel") {
     userID = username.match(/\d+/g)[0];
-    // travel = username.match(/\d+/g)[1]
-    // console.log(travel);
-
     getUser(userID);
     domUpdateFunctions.toggleUserDefaultPage();
   } else {
@@ -71,21 +62,28 @@ const getUser = (id) => {
   console.log("ID", id)
   fetchAPIData("travelers", id)
     .then(data => user = new Traveler(data))
-    .then(data => console.log("1 <>>>>", user));
+    .then(data => console.log("1 <>>>>", user))
+    .then(data => getUserTrips(id, user));
+}
+
+const getUserTrips = (id, user) => {
   fetchAPIData("trips")
     .then(data => user.trips = data.trips.map(trip => new Trip(trip)).filter(trip => trip.userID === eval(id)))
-    .then(data => console.log("2 <>>>>", user))
-    // .then(data => console.log(data.trips));
+    .then(data => getTripDestinations(id, user));
+}
+
+const getTripDestinations = (id, user) => {
   fetchAPIData("destinations")
     .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
     .then(data => console.log("3 <>>>>", user))
+    .then(data => setTimeout(600))
     .then(data => domUpdateFunctions.renderTripCards(user))
     .then(data => domUpdateFunctions.renderAllTripTotal(user));
 }
 
 // SLIDESHOW
 
-var slideIndex = 0;
+let slideIndex = 0;
 
 const showSlides = () => {
   slides.forEach(slide => slide.style.display ="none")

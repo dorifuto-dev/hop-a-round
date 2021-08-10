@@ -52,12 +52,11 @@
   margin-left: auto;
   display: flex;
   height: 100%;
-}
-
-.user-trips, .new-trip, .login, .sign-out {
-  height: 100%;
-  display: flex;
-  margin-right: 10px;
+  .user-trips, .new-trip, .login, .sign-out {
+    height: 100%;
+    display: flex;
+    margin-right: 10px;
+  }
 }
 
 .login-button, .user-trips-button, .user-new-trips-button, .sign-out-button {
@@ -169,6 +168,7 @@ main {
 
 .micromodal-slide {
   display: none;
+
 }
 
 .micromodal-slide.is-open {

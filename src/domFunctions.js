@@ -1,7 +1,15 @@
 const dayjs = require("dayjs");
-
 const todaysDate = (dayjs().format("YYYY/MM/DD"));
 const thisYear = dayjs().format("YYYY")
+
+const loginBtn = document.querySelector(".login");
+const userTripsBtn = document.querySelector(".user-trips");
+const newTripBtn = document.querySelector(".new-trip");
+const signOutBtn = document.querySelector(".sign-out");
+const defaultDisplay = document.querySelector(".default-display");
+const userDisplay = document.querySelector(".user-display");
+const userDisplayGrid = document.getElementById("userDisplayGrid");
+const newTripPage = document.getElementById("newTripPage");
 
 const domUpdateFunctions = {
   clearError() {
@@ -10,13 +18,6 @@ const domUpdateFunctions = {
   },
 
   toggleUserDefaultPage() {
-    const loginBtn = document.querySelector(".login");
-    const userTripsBtn = document.querySelector(".user-trips");
-    const newTripBtn = document.querySelector(".new-trip");
-    const signOutBtn = document.querySelector(".sign-out");
-    const defaultDisplay = document.querySelector(".default-display");
-    const userDisplay = document.querySelector(".user-display");
-
     loginBtn.classList.toggle("hide");
     userTripsBtn.classList.toggle("hide");
     newTripBtn.classList.toggle("hide");
@@ -25,8 +26,23 @@ const domUpdateFunctions = {
     userDisplay.classList.toggle("hide");
   },
 
+  showNewTripPage() {
+    newTripPage.classList.remove("hide");
+    userDisplay.classList.add("hide");
+  },
+
+  backToMainPage() {
+    if (!newTripPage.classList.contains("hide")) {
+      newTripPage.classList.add("hide");
+    }
+    loginBtn.classList.toggle("hide");
+    userTripsBtn.classList.toggle("hide");
+    newTripBtn.classList.toggle("hide");
+    signOutBtn.classList.toggle("hide");
+    defaultDisplay.classList.toggle("hide");
+  },
+
   renderTripCards(user) {
-    const userDisplayGrid = document.getElementById("userDisplayGrid");
     userDisplayGrid.innerHTML = "";
     let tripCardHTML = "";
 
@@ -52,43 +68,6 @@ const domUpdateFunctions = {
     const totalThisYear = document.getElementById("totalThisYear");
     totalThisYear.innerText = `${thisYear} Total Spent: $${user.findTotalSpent(thisYear)}`;
   }
-    // if (loginBtn.classList.includes("hide")) {
-    //   loginBtn.classList.remove("hide")
-    // } else {
-    //   loginBtn.classList.add("hide")
-    // }
-    //
-    // if (userTripsBtn.classList.includes("hide")) {
-    //   userTripsBtn.classList.remove("hide")
-    // } else {
-    //   userTripsBtn.classList.add("hide")
-    // }
-    //
-    // if (newTripBtn.classList.includes("hide")) {
-    //   newTripBtn.classList.remove("hide")
-    // } else {
-    //   newTripBtn.classList.add("hide")
-    // }
-    //
-    // if (signOutBtn.classList.includes("hide")) {
-    //   signOutBtn.classList.remove("hide")
-    // } else {
-    //   signOutBtn.classList.add("hide")
-    // }
-    //
-    // if (defaultDisplay.classList.includes("hide")) {
-    //   defaultDisplay.classList.remove("hide")
-    // } else {
-    //   defaultDisplay.classList.add("hide")
-    // }
-    //
-    // if (userDisplay.classList.includes("hide")) {
-    //   userDisplay.classList.remove("hide")
-    // } else {
-    //   userDisplay.classList.add("hide")
-    // }
-
-  // }
 }
 
 export default domUpdateFunctions;
