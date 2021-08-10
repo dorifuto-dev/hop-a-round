@@ -5,21 +5,21 @@ import "./css/base.scss";
 import MicroModal from "micromodal";
 import Traveler from "./Traveler";
 import { fetchAPIData, postNewTrip } from "./api-Calls";
+import domUpdateFunctions from "./domFunctions";
 
 MicroModal.init();
 
 const slides = document.querySelectorAll(".slide");
 
 // DUMMY NAV - REORGANIZE
-const loginBtn = document.querySelector(".login");
-const userTripsBtn = document.querySelector(".user-trips");
-const newTripBtn = document.querySelector(".new-trip");
-const signOutBtn = document.querySelector(".sign-out");
-const defaultDisplay = document.querySelector(".default-display");
-const userDisplay = document.querySelector(".user-display");
+// const loginBtn = document.querySelector(".login");
+// const userTripsBtn = document.querySelector(".user-trips");
+// const newTripBtn = document.querySelector(".new-trip");
+// const signOutBtn = document.querySelector(".sign-out");
+// const defaultDisplay = document.querySelector(".default-display");
+// const userDisplay = document.querySelector(".user-display");
 const loginForm = document.getElementById("loginForm");
-const loginError = document.getElementById("loginError");
-
+// const loginError = document.getElementById("loginError");
 
 loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
@@ -28,9 +28,11 @@ const checkHasNumber = (string) => {
   return /\d/.test(string);
 }
 
-const clearError = () => {
-  loginError.innerHTML = "";
-}
+// const checkProperFormat = (string) => {
+//   if (string)
+// }
+
+
 
 const getLoginData = (event) => {
   // debugger
@@ -39,15 +41,14 @@ const getLoginData = (event) => {
   const password = formData.get('password');
   const username = formData.get('username');
   let userID;
-  // = username.match(/\d+/g)[0];
-  // console.log(username);
   if (checkHasNumber(username) && password === "travel") {
     userID = username.match(/\d+/g)[0];
     console.log(userID);
     getUser(userID);
+    domUpdateFunctions.toggleUserDefaultPage();
   } else {
-    loginError.innerHTML = "Incorrect username or password. Please try again.";
-    setTimeout(clearError, 5000)
+    loginError.innerText = "Incorrect username or password. Please try again.";
+    setTimeout(domUpdateFunctions.clearError, 5000);
   }
   event.target.reset();
 }
@@ -79,8 +80,8 @@ const getLoginData = (event) => {
 
 const getUser = (id) => {
   fetchAPIData("travelers", id)
-  .then(data => new Traveler(data))
-  .then(data => console.log(data))
+    .then(data => new Traveler(data))
+    .then(data => console.log(data))
 }
 
 // SLIDESHOW
