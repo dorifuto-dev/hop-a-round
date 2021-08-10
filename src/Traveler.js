@@ -5,21 +5,21 @@ class Traveler {
     this.type = data.travelerType;
     this.trips = [];
     // this.approvedTrips = [] || this.trips.filter(trip => trip.status === "approved");
-    this.isLoggedIn = false;
+    // this.isLoggedIn = false;
   }
 
-  login(password) {
-    if (password === "travel" && this.isLoggedIn === false) {
-      this.isLoggedIn = true;
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // login(password) {
+  //   if (password === "travel" && this.isLoggedIn === false) {
+  //     this.isLoggedIn = true;
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  addTrip(trip) {
-    this.trips.push(trip);
-  }
+  // addTrip(trip) {
+  //   this.trips.push(trip);
+  // }
 
   findTotalSpent(year) {
     const tripsThisYear = this.trips.filter(trip => trip.date.includes(year) && trip.status === "approved");
