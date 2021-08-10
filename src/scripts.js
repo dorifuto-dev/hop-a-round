@@ -12,16 +12,24 @@ const slides = document.querySelectorAll(".slide");
 const signOutBtn = document.querySelector(".sign-out");
 const loginForm = document.getElementById("loginForm");
 const newTripBtn = document.getElementById("newTripBtn");
+const allTripsBtn = document.getElementById("allTripsBtn");
+const newTripForm = document.getElementById("newTripForm");
+
 
 // let allTripData;
 let user;
-// let allDestinationData;
+let allDestinationNames;
+
 window.addEventListener("load", () => {
-  // populateDestinationsInput();
+  getDestinationsArray();
 })
 
 loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
+})
+
+newTripForm.addEventListener("submit", (event) => {
+  getNewTripData(event);
 })
 
 signOutBtn.addEventListener("click", (event) => {
@@ -33,12 +41,20 @@ newTripBtn.addEventListener("click", (event) => {
   domUpdateFunctions.showNewTripPage();
 })
 
+allTripsBtn.addEventListener("click", (event) => {
+  domUpdateFunctions.showAllTripsPage();
+})
+
 const checkHasNumber = (string) => {
   return /\d/.test(string);
 }
 
-const populateDestinationsInput = () => {
-
+const getDestinationsArray = () => {
+  fetchAPIData("destinations")
+    // .then(response => response.json())
+    .then(data => allDestinationNames = data.destinations.map(destination => destination.destination))
+    // .then(data => console.log(allDestinationNames))
+    .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
 
 const getLoginData = (event) => {
@@ -58,9 +74,28 @@ const getLoginData = (event) => {
   event.target.reset();
 }
 
+const getNewTripData = (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const newTrip = {
+    id: null,
+    userID: null,
+    destinationID: parseInt(formData.get("destination")),
+    travelers: parseInt(formData.get("travelers")),
+    date: formData.get("departure-date"),
+    duration: parseInt(formData.get("duration")),
+    status: "pending",
+    suggestedActivities: []
+  }
+  console.log("NEW TRIP <>>>", newTrip)
+  // postNewTrip(newTrip);
+  event.target.reset();
+}
+
 const getUser = (id) => {
   console.log("ID", id)
   fetchAPIData("travelers", id)
+    // .then(response => response.json())
     .then(data => user = new Traveler(data))
     .then(data => console.log("1 <>>>>", user))
     .then(data => getUserTrips(id, user));
@@ -68,15 +103,17 @@ const getUser = (id) => {
 
 const getUserTrips = (id, user) => {
   fetchAPIData("trips")
+    // .then(response => response.json())
     .then(data => user.trips = data.trips.map(trip => new Trip(trip)).filter(trip => trip.userID === eval(id)))
     .then(data => getTripDestinations(id, user));
 }
 
 const getTripDestinations = (id, user) => {
   fetchAPIData("destinations")
+    // .then(response => response.json())
     .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
-    .then(data => console.log("3 <>>>>", user))
-    .then(data => setTimeout(600))
+    .then(data => console.log("3 <>>>>", data))
+    // .then(data => setTimeout(600))
     .then(data => domUpdateFunctions.renderTripCards(user))
     .then(data => domUpdateFunctions.renderAllTripTotal(user));
 }

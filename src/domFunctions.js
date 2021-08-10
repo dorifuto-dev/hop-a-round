@@ -10,6 +10,7 @@ const defaultDisplay = document.querySelector(".default-display");
 const userDisplay = document.querySelector(".user-display");
 const userDisplayGrid = document.getElementById("userDisplayGrid");
 const newTripPage = document.getElementById("newTripPage");
+const destinationsList = document.getElementById("destinations");
 
 const domUpdateFunctions = {
   clearError() {
@@ -17,7 +18,7 @@ const domUpdateFunctions = {
     loginError.innerText = "";
   },
 
-  toggleUserDefaultPage() {
+  toggleUserDefaultPage: () => {
     loginBtn.classList.toggle("hide");
     userTripsBtn.classList.toggle("hide");
     newTripBtn.classList.toggle("hide");
@@ -35,6 +36,7 @@ const domUpdateFunctions = {
     if (!newTripPage.classList.contains("hide")) {
       newTripPage.classList.add("hide");
     }
+    userDisplay.classList.add("hide");
     loginBtn.classList.toggle("hide");
     userTripsBtn.classList.toggle("hide");
     newTripBtn.classList.toggle("hide");
@@ -42,10 +44,31 @@ const domUpdateFunctions = {
     defaultDisplay.classList.toggle("hide");
   },
 
+  showAllTripsPage: () => {
+    userDisplay.classList.remove("hide");
+    newTripPage.classList.add("hide");
+  },
+
+  // counter: (num) => {
+  //   num += 1;
+  // },
+
+  populateDestinationsArray: (destinationArr) => {
+    console.log(destinationArr)
+    destinationsList.innerHTML = "";
+    let destinationHTML = "";
+    let id = 1
+    destinationArr.forEach(dest => {
+      destinationHTML += `<option value=${id}>${dest}</option>`
+      id++;
+    })
+    console.log(destinationHTML);
+    destinationsList.innerHTML = destinationHTML;
+  },
+
   renderTripCards(user) {
     userDisplayGrid.innerHTML = "";
     let tripCardHTML = "";
-
     user.trips.forEach(trip => {
       const destination = trip.destination;
       tripCardHTML += `<article class="trip-card">
