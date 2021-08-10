@@ -20,7 +20,7 @@ let allTrips;
 let user;
 let userID;
 let allDestinationNames;
-let tripID = 201;
+let newID;
 
 window.addEventListener("load", () => {
   getDestinationsArray();
@@ -63,9 +63,9 @@ newTripForm.addEventListener("submit", (event) => {
 const getTripDataLength = (event) => {
   event.preventDefault();
   fetchAPIData("trips")
-    .then(data => length = data.trips.length)
-    .then(data => console.log(length))
-    .then(data => getNewTripData(event, length))
+    .then(data => newID = data.trips.length + 1)
+    .then(data => console.log(newID))
+    .then(data => getNewTripData(event, newID))
 }
 
 const getLoginData = (event) => {
@@ -85,11 +85,10 @@ const getLoginData = (event) => {
   event.target.reset();
 }
 
-const getNewTripData = (event, length) => {
-  // event.preventDefault();
+const getNewTripData = (event, newID) => {
   const formData = new FormData(event.target);
   const newTrip = {
-    id: length,
+    id: newID,
     userID: JSON.parse(userID),
     destinationID: JSON.parse(formData.get("destination")),
     travelers: JSON.parse(formData.get("travelers")),
@@ -98,11 +97,8 @@ const getNewTripData = (event, length) => {
     status: "pending",
     suggestedActivities: []
   }
-  tripID++;
   console.log("NEW TRIP <>>>", newTrip)
   matchDestination(newTrip);
-  // domUpdateFunctions.displayTripPreview(newTrip);
-  // postNewTrip(newTrip);
   event.target.reset();
 }
 
@@ -115,30 +111,20 @@ const matchDestination = (trip) => {
 }
 
 const getUser = (id) => {
-  // console.log("ID", id)
   fetchAPIData("travelers", id)
-    // .then(response => response.json())
     .then(data => user = new Traveler(data))
-    // .then(data => console.log("1 <>>>>", user))
     .then(data => getUserTrips(id, user));
 }
 
 const getUserTrips = (id, user) => {
   fetchAPIData("trips")
-    // .then(response => response.json())
-    // .then(data => allTrips = data.trips);
-    // console.log(allTrips)
-    // .then(data => user.trips = allTrips.map(trip => new Trip(trip)).filter())
     .then(data => user.trips = data.trips.map(trip => new Trip(trip)).filter(trip => trip.userID === eval(id)))
     .then(data => getTripDestinations(id, user));
 }
 
 const getTripDestinations = (id, user) => {
   fetchAPIData("destinations")
-    // .then(response => response.json())
-    // .then(data => console.log(data)
     .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
-    // .then(data => console.log("3 <>>>>", data))
     .then(data => setTimeout(600))
     .then(data => domUpdateFunctions.renderTripCards(user))
     .then(data => domUpdateFunctions.renderAllTripTotal(user));

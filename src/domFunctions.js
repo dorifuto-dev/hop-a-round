@@ -1,3 +1,4 @@
+import { fetchAPIData, postNewTrip } from "./api-Calls";
 const dayjs = require("dayjs");
 const todaysDate = (dayjs().format("YYYY/MM/DD"));
 const thisYear = dayjs().format("YYYY")
@@ -20,6 +21,8 @@ const tripEstimateDate = document.getElementById("tripEstimateDate");
 const tripEstimateDuration = document.getElementById("tripEstimateDuration");
 const tripEstimateTravelers = document.getElementById("tripEstimateTravelers");
 const tripEstimateCost = document.getElementById("tripEstimateCost");
+const cancelTrip = document.getElementById("cancelTrip");
+const confirmTrip = document.getElementById("confirmTrip");
 
 const domUpdateFunctions = {
   clearError: () => {
@@ -89,29 +92,56 @@ const domUpdateFunctions = {
     userDisplayGrid.innerHTML = tripCardHTML;
   },
 
+  renderNewTripCard: (trip, total, destObj) => {
+    userDisplayGrid.innerHTML += `<article class="trip-card">
+        <div class="trip-preview">
+          <img class="trip-image" src=${destObj.image} alt=${destObj.alt}>
+        </div>
+        <div class="trip-info">
+          <h3 class="destination-name">${destObj.destination}</h3>
+          <p class="departure-date">${trip.date}</p>
+          <p class="number-of-travelers">${trip.travelers} travelers</p>
+          <p class="trip-status">${trip.status}</p>
+          <p class="trip-cost">$${total}</p>
+        </div>
+      </article>`
+  },
+
   renderAllTripTotal: (user) => {
     totalThisYear.innerText = `${thisYear} Total Spent: $${user.findTotalSpent(thisYear)}`;
   },
 
-
-  // toggleFormEstimatePage: () => {
-  // },
+  hideShowFormEstimate: () => {
+    newTripForm.classList.toggle("hide");
+    tripEstimateCard.classList.toggle("hide");
+  },
 
   displayTripPreview: (trip, destObj) => {
+    domUpdateFunctions.hideShowFormEstimate();
     const totalLodging = destObj.estimatedLodgingCostPerDay * trip.duration * trip.travelers;
     const totalAirfare = destObj.estimatedFlightCostPerPerson * trip.travelers;
     const total = Math.round((totalLodging + totalAirfare) * 1.1);
-    newTripForm.classList.toggle("hide");
-    tripEstimateCard.classList.toggle("hide");
+
     tripEstimateDestination.innerText = destObj.destination;
     tripEstimateDate.innerText = trip.date;
     tripEstimateDuration.innerText = `${trip.duration} days`;
     tripEstimateTravelers.innerText = `${trip.travelers} travelers`;
     tripEstimateCost.innerText = `Total Cost: $${total}`;
-    // this.toggleFormEstimatePage();
-    // return Promise;
-
+    domUpdateFunctions.evaluateUserChoice(trip, total, destObj);
   },
+
+  evaluateUserChoice: (trip, total, destObj) => {
+    cancelTrip.onclick = () => {
+      domUpdateFunctions.hideShowFormEstimate();
+    }
+    confirmTrip.onclick = () => {
+      postNewTrip(trip);
+      domUpdateFunctions.showAllTripsPage();
+      if(postNewTrip(trip)) {
+        domUpdateFunctions.renderNewTripCard(trip, total, destObj)
+      }
+    }
+  }
 }
 
 export default domUpdateFunctions;

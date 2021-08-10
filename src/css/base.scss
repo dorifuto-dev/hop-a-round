@@ -25,6 +25,8 @@
   padding: 0px;
 }
 
+// *********************NAV BAR***************************
+
 .top-menu {
   height: 100px;
   background-color: #0288D1;
@@ -81,7 +83,7 @@ main {
   @include flex-column-center;
 }
 
-// LOGIN MicroModal
+// *********************LOGIN MICROMODAL***************************
 
 .login-modal {
   z-index: 10;
@@ -203,6 +205,8 @@ main {
   color: #212121;
 }
 
+// *********************SLIDESHOW***************************
+
 .slideshow-container {
   position: relative;
   margin: auto;
@@ -286,6 +290,8 @@ main {
   display: table;
 }
 
+// *********************USER TRIPS PAGE***************************
+
 .user-display-grid {
   margin: 10px 15px 10px;
   display: grid;
@@ -319,8 +325,14 @@ main {
   justify-content: space-between;
 }
 
+// *********************NEW TRIP PAGE***************************
+
 .new-trip-page {
   @include flex-column-center;
+  .new-trip-title {
+    margin: 20px 0px 10px;
+    font-size: 1.7em;
+  }
 }
 
 .new-trip-box {
@@ -343,4 +355,36 @@ main {
 
 .form-left, .form-right {
   @include flex-column-center;
+}
+
+.trip-estimate-card {
+  @include flex-column-center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  .trip-estimate-destination {
+    font-size: 2em;
+  }
+  .trip-estimate {
+    font-size: 1.5em;
+  }
+  .confirm-cancel-trip {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+  }
+  button {
+    cursor: pointer;
+    padding: 10px 25px;
+    border-radius: 3px;
+    border: 1px solid black;
+    color: #ffffff;
+  }
+  .cancel-trip {
+    background-color: #757575;
+  }
+  .confirm-trip {
+    background-color: #0288D1;
+  }
+
 }
