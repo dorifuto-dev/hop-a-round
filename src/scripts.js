@@ -10,12 +10,11 @@ const dayjs = require("dayjs");
 MicroModal.init();
 
 const slides = document.querySelectorAll(".slide");
-const signOutBtn = document.querySelector(".sign-out");
+const signOutBtn = document.getElementById("signOutBtn");
 const loginForm = document.getElementById("loginForm");
 const newTripBtn = document.getElementById("newTripBtn");
 const allTripsBtn = document.getElementById("allTripsBtn");
 const newTripForm = document.getElementById("newTripForm");
-
 
 let allTrips;
 let user;
@@ -55,6 +54,7 @@ const getDestinationsArray = () => {
     // .then(data => console.log(allDestinationNames))
     .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
+
 newTripForm.addEventListener("submit", (event) => {
   // getNewTripData(event);
   getTripDataLength(event);
@@ -100,9 +100,18 @@ const getNewTripData = (event, length) => {
   }
   tripID++;
   console.log("NEW TRIP <>>>", newTrip)
-  // domUpdateFunctions.displayTripPreview(newTrip)
-  postNewTrip(newTrip);
+  matchDestination(newTrip);
+  // domUpdateFunctions.displayTripPreview(newTrip);
+  // postNewTrip(newTrip);
   event.target.reset();
+}
+
+const matchDestination = (trip) => {
+  let newDestination;
+  fetchAPIData("destinations")
+    .then(data => newDestination = data.destinations.find(destination => destination.id === trip.destinationID))
+    .then(data => console.log("MATCH <>>>", newDestination))
+    .then(data => domUpdateFunctions.displayTripPreview(trip, newDestination))
 }
 
 const getUser = (id) => {

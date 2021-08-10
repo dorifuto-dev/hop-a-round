@@ -2,19 +2,27 @@ const dayjs = require("dayjs");
 const todaysDate = (dayjs().format("YYYY/MM/DD"));
 const thisYear = dayjs().format("YYYY")
 
-const loginBtn = document.querySelector(".login");
-const userTripsBtn = document.querySelector(".user-trips");
-const newTripBtn = document.querySelector(".new-trip");
-const signOutBtn = document.querySelector(".sign-out");
-const defaultDisplay = document.querySelector(".default-display");
-const userDisplay = document.querySelector(".user-display");
+const loginBtn = document.getElementById("loginBtn");
+const userTripsBtn = document.getElementById("allTripsBtn");
+const newTripBtn = document.getElementById("newTripBtn");
+const signOutBtn = document.getElementById("signOutBtn");
+const defaultDisplay = document.getElementById("defaultDisplay");
+const userDisplay = document.getElementById("userDisplay");
 const userDisplayGrid = document.getElementById("userDisplayGrid");
 const newTripPage = document.getElementById("newTripPage");
 const destinationsList = document.getElementById("destinations");
+const totalThisYear = document.getElementById("totalThisYear");
+const loginError = document.getElementById("loginError");
+const newTripForm = document.getElementById("newTripForm");
+const tripEstimateCard = document.getElementById("tripEstimateCard");
+const tripEstimateDestination = document.getElementById("tripEstimateDestination");
+const tripEstimateDate = document.getElementById("tripEstimateDate");
+const tripEstimateDuration = document.getElementById("tripEstimateDuration");
+const tripEstimateTravelers = document.getElementById("tripEstimateTravelers");
+const tripEstimateCost = document.getElementById("tripEstimateCost");
 
 const domUpdateFunctions = {
-  clearError() {
-    const loginError = document.getElementById("loginError");
+  clearError: () => {
     loginError.innerText = "";
   },
 
@@ -27,12 +35,12 @@ const domUpdateFunctions = {
     userDisplay.classList.toggle("hide");
   },
 
-  showNewTripPage() {
+  showNewTripPage: () => {
     newTripPage.classList.remove("hide");
     userDisplay.classList.add("hide");
   },
 
-  backToMainPage() {
+  backToMainPage: () => {
     if (!newTripPage.classList.contains("hide")) {
       newTripPage.classList.add("hide");
     }
@@ -49,12 +57,7 @@ const domUpdateFunctions = {
     newTripPage.classList.add("hide");
   },
 
-  // counter: (num) => {
-  //   num += 1;
-  // },
-
   populateDestinationsArray: (destinationArr) => {
-    // console.log(destinationArr)
     destinationsList.innerHTML = "";
     let destinationHTML = "";
     let id = 1
@@ -62,11 +65,10 @@ const domUpdateFunctions = {
       destinationHTML += `<option value=${id}>${dest}</option>`
       id++;
     })
-    // console.log(destinationHTML);
     destinationsList.innerHTML = destinationHTML;
   },
 
-  renderTripCards(user) {
+  renderTripCards: (user) => {
     userDisplayGrid.innerHTML = "";
     let tripCardHTML = "";
     user.trips.forEach(trip => {
@@ -87,10 +89,29 @@ const domUpdateFunctions = {
     userDisplayGrid.innerHTML = tripCardHTML;
   },
 
-  renderAllTripTotal(user) {
-    const totalThisYear = document.getElementById("totalThisYear");
+  renderAllTripTotal: (user) => {
     totalThisYear.innerText = `${thisYear} Total Spent: $${user.findTotalSpent(thisYear)}`;
-  }
+  },
+
+
+  // toggleFormEstimatePage: () => {
+  // },
+
+  displayTripPreview: (trip, destObj) => {
+    const totalLodging = destObj.estimatedLodgingCostPerDay * trip.duration * trip.travelers;
+    const totalAirfare = destObj.estimatedFlightCostPerPerson * trip.travelers;
+    const total = Math.round((totalLodging + totalAirfare) * 1.1);
+    newTripForm.classList.toggle("hide");
+    tripEstimateCard.classList.toggle("hide");
+    tripEstimateDestination.innerText = destObj.destination;
+    tripEstimateDate.innerText = trip.date;
+    tripEstimateDuration.innerText = `${trip.duration} days`;
+    tripEstimateTravelers.innerText = `${trip.travelers} travelers`;
+    tripEstimateCost.innerText = `Total Cost: $${total}`;
+    // this.toggleFormEstimatePage();
+    // return Promise;
+
+  },
 }
 
 export default domUpdateFunctions;
