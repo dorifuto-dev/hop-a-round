@@ -4,26 +4,38 @@ import "./images/plane.svg";
 import "./css/base.scss";
 import MicroModal from "micromodal";
 import Traveler from "./Traveler";
+import Trip from "./Trip";
 import { fetchAPIData, postNewTrip } from "./api-Calls";
 import domUpdateFunctions from "./domFunctions";
 
 MicroModal.init();
 
-const slides = document.querySelectorAll(".slide");
+// {openTrigger : 'data-micromodal-trigger', closeTrigger: "data-micromodal-close"}
 
 // DUMMY NAV - REORGANIZE
 // const loginBtn = document.querySelector(".login");
 // const userTripsBtn = document.querySelector(".user-trips");
 // const newTripBtn = document.querySelector(".new-trip");
-// const signOutBtn = document.querySelector(".sign-out");
 // const defaultDisplay = document.querySelector(".default-display");
 // const userDisplay = document.querySelector(".user-display");
-const loginForm = document.getElementById("loginForm");
 // const loginError = document.getElementById("loginError");
+const slides = document.querySelectorAll(".slide");
+const signOutBtn = document.querySelector(".sign-out");
+const loginForm = document.getElementById("loginForm");
+
+let allTripData;
+let user;
+let allDestinationData;
 
 loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
 })
+
+signOutBtn.addEventListener("click", (event) => {
+  domUpdateFunctions.toggleUserDefaultPage();
+  MicroModal.close();
+})
+
 const checkHasNumber = (string) => {
   return /\d/.test(string);
 }
@@ -41,9 +53,11 @@ const getLoginData = (event) => {
   const password = formData.get('password');
   const username = formData.get('username');
   let userID;
-  if (checkHasNumber(username) && password === "travel") {
+  if (checkHasNumber(username) && username.includes("traveler") && password === "travel") {
     userID = username.match(/\d+/g)[0];
-    console.log(userID);
+    // travel = username.match(/\d+/g)[1]
+    // console.log(travel);
+
     getUser(userID);
     domUpdateFunctions.toggleUserDefaultPage();
   } else {
@@ -53,35 +67,19 @@ const getLoginData = (event) => {
   event.target.reset();
 }
 
-
-// loginBtn.addEventListener("click", () => {
-//   showUserDisplay();
-// });
-//
-// signOutBtn.addEventListener("click", () => {
-//   showDefaultPage();
-// })
-//
-// const showUserDisplay = () => {
-//   defaultDisplay.classList.add("hide")
-//   userDisplay.classList.remove("hide");
-//   signOutBtn.classList.remove("hide");
-//   userTripsBtn.classList.remove("hide");
-//   newTripBtn.classList.remove("hide");
-// }
-//
-// const showDefaultPage = () => {
-//   defaultDisplay.classList.remove("hide")
-//   userDisplay.classList.add("hide");
-//   signOutBtn.classList.add("hide");
-//   userTripsBtn.classList.add("hide");
-//   newTripBtn.classList.add("hide");
-// }
-
 const getUser = (id) => {
+  console.log("ID", id)
   fetchAPIData("travelers", id)
-    .then(data => new Traveler(data))
-    .then(data => console.log(data))
+    .then(data => user = new Traveler(data))
+    .then(data => console.log("1 <>>>>", user));
+  fetchAPIData("trips")
+    .then(data => user.trips = data.trips.map(trip => new Trip(trip)).filter(trip => trip.userID === eval(id)))
+    .then(data => console.log("2 <>>>>", user))
+    // .then(data => console.log(data.trips));
+  fetchAPIData("destinations")
+    .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
+    .then(data => console.log("3 <>>>>", user))
+    .then(data => domUpdateFunctions.renderTripCards(user));
 }
 
 // SLIDESHOW

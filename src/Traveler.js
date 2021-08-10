@@ -4,6 +4,7 @@ class Traveler {
     this.name = data.name;
     this.type = data.travelerType;
     this.trips = [];
+    // this.approvedTrips = [] || this.trips.filter(trip => trip.status === "approved");
     this.isLoggedIn = false;
   }
 

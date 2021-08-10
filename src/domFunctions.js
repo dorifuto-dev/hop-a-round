@@ -10,10 +10,6 @@ const domUpdateFunctions = {
     loginError.innerText = "";
   },
 
-  // toggleShowHide(element) {
-  //   element.classList.toggle("hide")
-  // }
-
   toggleUserDefaultPage() {
     const loginBtn = document.querySelector(".login");
     const userTripsBtn = document.querySelector(".user-trips");
@@ -28,6 +24,31 @@ const domUpdateFunctions = {
     signOutBtn.classList.toggle("hide");
     defaultDisplay.classList.toggle("hide");
     userDisplay.classList.toggle("hide");
+  },
+
+  renderTripCards(user) {
+    const userDisplayGrid = document.getElementById("userDisplayGrid");
+    userDisplayGrid.innerHTML = "";
+    let tripCardHTML = "";
+
+    user.trips.forEach(trip => {
+      const destination = trip.destination;
+      tripCardHTML += `<article class="trip-card">
+          <div class="trip-preview">
+            <img class="trip-image" src=${destination.image} alt=${destination.alt}>
+          </div>
+          <div class="trip-info">
+            <h3 class="destination-name">${destination.destination}</h3>
+            <p class="departure-date">${trip.date}</p>
+            <p class="number-of-travelers">${trip.travelers} travelers</p>
+            <p class="trip-status">${trip.status}</p>
+            <p class="trip-cost">$${trip.calculateTotalFare()}</p>
+          </div>
+        </article>`;
+    })
+    userDisplayGrid.innerHTML = tripCardHTML;
+    // userDisplayGrid.insertAdjacentHTML("afterbegin", tripCardHTML)
+
   }
 
     // if (loginBtn.classList.includes("hide")) {

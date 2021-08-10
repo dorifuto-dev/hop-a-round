@@ -7,9 +7,14 @@
   align-items: center;
 }
 
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 * {
   font-family: 'Open Sans', sans-serif;
-  border: 1px dotted lime;
+  // border: 1px dotted lime;
 }
 
 *,
@@ -134,54 +139,13 @@ main {
   line-height: 1.5;
   color: rgba(0,0,0,.8);
   height: 100%;
-
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   align-items: left;
   justify-content: space-between;
-  // height: 15em;
 }
-
-// .login-modal-btn {
-//   font-size: .875rem;
-//   padding-left: 1rem;
-//   padding-right: 1rem;
-//   padding-top: .5rem;
-//   padding-bottom: .5rem;
-//   background-color: #e6e6e6;
-//   color: rgba(0,0,0,.8);
-//   border-radius: .25rem;
-//   border-style: none;
-//   border-width: 0;
-//   cursor: pointer;
-//   -webkit-appearance: button;
-//   text-transform: none;
-//   overflow: visible;
-//   line-height: 1.15;
-//   margin: 0;
-//   will-change: transform;
-//   -moz-osx-font-smoothing: grayscale;
-//   -webkit-backface-visibility: hidden;
-//   backface-visibility: hidden;
-//   -webkit-transform: translateZ(0);
-//   transform: translateZ(0);
-//   transition: -webkit-transform .25s ease-out;
-//   transition: transform .25s ease-out;
-//   transition: transform .25s ease-out,-webkit-transform .25s ease-out;
-// }
-
-// .login-modal-btn:focus, .login-modal-btn:hover {
-//   -webkit-transform: scale(1.05);
-//   transform: scale(1.05);
-// }
-
-// .login-modal-btn-primary {
-//   background-color: #00449e;
-//   color: #fff;
-// }
 
 @keyframes mmfadeIn {
     from { opacity: 0; }
@@ -300,7 +264,6 @@ main {
   to {opacity: 1}
 }
 
-
 .user-nav {
   display: flex;
   justify-content: space-between;
@@ -327,7 +290,7 @@ main {
   margin: 10px 15px 10px;
   display: grid;
   grid-template-columns: repeat(4, auto);
-  grid-gap: 8px;
+  grid-gap: 12px;
 }
 
 .trip-card {
@@ -350,10 +313,9 @@ main {
 }
 
 .trip-info {
+  @include flex-column;
   height: 60%;
   margin-left: 5px;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 
