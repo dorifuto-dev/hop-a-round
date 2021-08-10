@@ -44,24 +44,24 @@ describe('Traveler', () => {
     expect(traveler.trips).to.deep.equal([]);
   });
 
-  it('Should have a property isLoggedIn which defaults to false', () => {
-    expect(traveler.isLoggedIn).to.equal(false);
-  });
+  // it('Should have a property isLoggedIn which defaults to false', () => {
+  //   expect(traveler.isLoggedIn).to.equal(false);
+  // });
 
-  it('Should be able to log in', () => {
-    expect(traveler.login('travel')).to.equal(true);
-    expect(traveler.isLoggedIn).to.equal(true);
+  // it('Should be able to log in', () => {
+  //   expect(traveler.login('travel')).to.equal(true);
+  //   expect(traveler.isLoggedIn).to.equal(true);
+  //
+  //   expect(traveler2.login('manatee')).to.equal(false);
+  //   expect(traveler2.isLoggedIn).to.equal(false);
+  // });
 
-    expect(traveler2.login('manatee')).to.equal(false);
-    expect(traveler2.isLoggedIn).to.equal(false);
-  });
-
-  it('Should be able to update it\'s list of trips', () => {
-    traveler.addTrip(trip);
-
-    expect(traveler.trips.length).to.equal(1);
-    expect(traveler.trips).to.deep.equal([trip]);
-  });
+  // it('Should be able to update it\'s list of trips', () => {
+  //   traveler.addTrip(trip);
+  //
+  //   expect(traveler.trips.length).to.equal(1);
+  //   expect(traveler.trips).to.deep.equal([trip]);
+  // });
 
   it('Should be able to find the total amount spent on trips', () => {
     const total1 = traveler.findTotalSpent();
