@@ -1,10 +1,9 @@
+const dayjs = require("dayjs");
 
+const todaysDate = (dayjs().format("YYYY/MM/DD"));
+const thisYear = dayjs().format("YYYY")
 
 const domUpdateFunctions = {
-  // sample() {
-  //   console.log("HELLLOOOOO")
-  // }
-
   clearError() {
     const loginError = document.getElementById("loginError");
     loginError.innerText = "";
@@ -47,10 +46,12 @@ const domUpdateFunctions = {
         </article>`;
     })
     userDisplayGrid.innerHTML = tripCardHTML;
-    // userDisplayGrid.insertAdjacentHTML("afterbegin", tripCardHTML)
+  },
 
+  renderAllTripTotal(user) {
+    const totalThisYear = document.getElementById("totalThisYear");
+    totalThisYear.innerText = `${thisYear} Total Spent: $${user.findTotalSpent(thisYear)}`;
   }
-
     // if (loginBtn.classList.includes("hide")) {
     //   loginBtn.classList.remove("hide")
     // } else {

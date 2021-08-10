@@ -79,7 +79,8 @@ const getUser = (id) => {
   fetchAPIData("destinations")
     .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
     .then(data => console.log("3 <>>>>", user))
-    .then(data => domUpdateFunctions.renderTripCards(user));
+    .then(data => domUpdateFunctions.renderTripCards(user))
+    .then(data => domUpdateFunctions.renderAllTripTotal(user));
 }
 
 // SLIDESHOW

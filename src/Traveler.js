@@ -21,11 +21,12 @@ class Traveler {
     this.trips.push(trip);
   }
 
-  findTotalSpent() {
-    if (this.trips.length === 0) {
-      return null;
+  findTotalSpent(year) {
+    const tripsThisYear = this.trips.filter(trip => trip.date.includes(year) && trip.status === "approved");
+    if (tripsThisYear.length === 0) {
+      return 0;
     } else {
-      return this.trips.reduce((accNum, trip) => {
+      return tripsThisYear.reduce((accNum, trip) => {
         accNum += trip.calculateTotalFare();
         return accNum;
       }, 0)
