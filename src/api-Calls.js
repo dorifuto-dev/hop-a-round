@@ -1,3 +1,5 @@
+const tripError = document.getElementById("newTripError")
+
 const fetchAPIData = (type, id) => {
   if (id) {
     return fetch(`http://localhost:3001/api/v1/${type}/${id}`)
@@ -17,12 +19,22 @@ const postNewTrip = (tripObject) => {
     body: JSON.stringify(tripObject)
   })
     .then(response => checkForError(response))
-    .catch(error => console.log(error))
+    .catch(error => displayError(error))
+}
+
+const displayError = (error) => {
+  console.log(error)
+  tripError.innerText = "Trip Request timed out. Please try again.";
+  setTimeout(clearError, 5000);
+}
+
+const clearError = () => {
+  tripError.innerText = "";
 }
 
 const checkForError = (response) => {
   if (!response.ok) {
-    error.forEach(error => error.innerText = "Please make sure that all fields are filled out.");
+    // tripError.innerText = "Please make sure that all fields are filled out.";
     throw new Error("Please make sure that all fields are filled out.");
   } else {
     return response.json()

@@ -54,7 +54,7 @@ const domUpdateFunctions = {
   // },
 
   populateDestinationsArray: (destinationArr) => {
-    console.log(destinationArr)
+    // console.log(destinationArr)
     destinationsList.innerHTML = "";
     let destinationHTML = "";
     let id = 1
@@ -62,7 +62,7 @@ const domUpdateFunctions = {
       destinationHTML += `<option value=${id}>${dest}</option>`
       id++;
     })
-    console.log(destinationHTML);
+    // console.log(destinationHTML);
     destinationsList.innerHTML = destinationHTML;
   },
 

@@ -5,6 +5,7 @@ import Traveler from "./Traveler";
 import Trip from "./Trip";
 import { fetchAPIData, postNewTrip } from "./api-Calls";
 import domUpdateFunctions from "./domFunctions";
+const dayjs = require("dayjs");
 
 MicroModal.init();
 
@@ -19,6 +20,7 @@ const newTripForm = document.getElementById("newTripForm");
 // let allTripData;
 let user;
 let allDestinationNames;
+let tripID = 201;
 
 window.addEventListener("load", () => {
   getDestinationsArray();
@@ -78,26 +80,27 @@ const getNewTripData = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const newTrip = {
-    id: null,
-    userID: null,
-    destinationID: parseInt(formData.get("destination")),
-    travelers: parseInt(formData.get("travelers")),
-    date: formData.get("departure-date"),
-    duration: parseInt(formData.get("duration")),
+    id: 220,
+    userID: 43,
+    destinationID: JSON.parse(formData.get("destination")),
+    travelers: JSON.parse(formData.get("travelers")),
+    date: dayjs(formData.get("departure-date")).format("YYYY/MM/DD"),
+    duration: JSON.parse(formData.get("duration")),
     status: "pending",
     suggestedActivities: []
   }
+  tripID++;
   console.log("NEW TRIP <>>>", newTrip)
-  // postNewTrip(newTrip);
+  postNewTrip(newTrip);
   event.target.reset();
 }
 
 const getUser = (id) => {
-  console.log("ID", id)
+  // console.log("ID", id)
   fetchAPIData("travelers", id)
     // .then(response => response.json())
     .then(data => user = new Traveler(data))
-    .then(data => console.log("1 <>>>>", user))
+    // .then(data => console.log("1 <>>>>", user))
     .then(data => getUserTrips(id, user));
 }
 
@@ -112,8 +115,8 @@ const getTripDestinations = (id, user) => {
   fetchAPIData("destinations")
     // .then(response => response.json())
     .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
-    .then(data => console.log("3 <>>>>", data))
-    // .then(data => setTimeout(600))
+    // .then(data => console.log("3 <>>>>", data))
+    .then(data => setTimeout(600))
     .then(data => domUpdateFunctions.renderTripCards(user))
     .then(data => domUpdateFunctions.renderAllTripTotal(user));
 }
