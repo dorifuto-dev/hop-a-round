@@ -13,7 +13,7 @@ const fetchAPIData = (type, id) => {
 }
 
 const postNewTrip = (tripObject) => {
-  fetch("http://localhost:3001/api/v1/trips", {
+  fetch("http://localhost:300/api/v1/trips", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(tripObject)

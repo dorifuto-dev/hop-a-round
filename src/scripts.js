@@ -17,8 +17,9 @@ const allTripsBtn = document.getElementById("allTripsBtn");
 const newTripForm = document.getElementById("newTripForm");
 
 
-// let allTripData;
+let allTrips;
 let user;
+let userID;
 let allDestinationNames;
 let tripID = 201;
 
@@ -28,10 +29,6 @@ window.addEventListener("load", () => {
 
 loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
-})
-
-newTripForm.addEventListener("submit", (event) => {
-  getNewTripData(event);
 })
 
 signOutBtn.addEventListener("click", (event) => {
@@ -58,13 +55,25 @@ const getDestinationsArray = () => {
     // .then(data => console.log(allDestinationNames))
     .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
+newTripForm.addEventListener("submit", (event) => {
+  // getNewTripData(event);
+  getTripDataLength(event);
+})
+
+const getTripDataLength = (event) => {
+  event.preventDefault();
+  fetchAPIData("trips")
+    .then(data => length = data.trips.length)
+    .then(data => console.log(length))
+    .then(data => getNewTripData(event, length))
+}
 
 const getLoginData = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const password = formData.get('password');
   const username = formData.get('username');
-  let userID;
+  // let userID;
   if (checkHasNumber(username) && username.includes("traveler") && password === "travel") {
     userID = username.match(/\d+/g)[0];
     getUser(userID);
@@ -76,12 +85,12 @@ const getLoginData = (event) => {
   event.target.reset();
 }
 
-const getNewTripData = (event) => {
-  event.preventDefault();
+const getNewTripData = (event, length) => {
+  // event.preventDefault();
   const formData = new FormData(event.target);
   const newTrip = {
-    id: 220,
-    userID: 43,
+    id: length,
+    userID: JSON.parse(userID),
     destinationID: JSON.parse(formData.get("destination")),
     travelers: JSON.parse(formData.get("travelers")),
     date: dayjs(formData.get("departure-date")).format("YYYY/MM/DD"),
@@ -91,6 +100,7 @@ const getNewTripData = (event) => {
   }
   tripID++;
   console.log("NEW TRIP <>>>", newTrip)
+  // domUpdateFunctions.displayTripPreview(newTrip)
   postNewTrip(newTrip);
   event.target.reset();
 }
@@ -107,6 +117,9 @@ const getUser = (id) => {
 const getUserTrips = (id, user) => {
   fetchAPIData("trips")
     // .then(response => response.json())
+    // .then(data => allTrips = data.trips);
+    // console.log(allTrips)
+    // .then(data => user.trips = allTrips.map(trip => new Trip(trip)).filter())
     .then(data => user.trips = data.trips.map(trip => new Trip(trip)).filter(trip => trip.userID === eval(id)))
     .then(data => getTripDestinations(id, user));
 }
@@ -114,6 +127,7 @@ const getUserTrips = (id, user) => {
 const getTripDestinations = (id, user) => {
   fetchAPIData("destinations")
     // .then(response => response.json())
+    // .then(data => console.log(data)
     .then(data => user.trips.forEach(trip => trip.destination = data.destinations.find(destination => destination.id === trip.destinationID)))
     // .then(data => console.log("3 <>>>>", data))
     .then(data => setTimeout(600))
