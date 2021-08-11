@@ -18,22 +18,22 @@
       </div>
     </section>
     <ul class="user-menu">
-      <li class="login" tabindex="1">
+      <li id="loginBtn" class="login">
         <p data-micromodal-trigger="loginModal" class="login-button">Login</p>
       </li>
-      <li class="user-trips hide">
+      <li id="allTripsBtn" class="user-trips hide">
         <p class="user-trips-button">All Trips</p>
       </li>
-      <li class="new-trip hide">
+      <li id="newTripBtn" class="new-trip hide">
         <p class="user-new-trips-button">New Trip</p>
       </li>
-      <li class="sign-out hide">
+      <li id="signOutBtn" class="sign-out hide">
         <p class="sign-out-button">Sign Out</p>
       </li>
     </ul>
   </nav>
   <main>
-    <section class="default-display">
+    <section id="defaultDisplay" class="default-display">
       <div class="login-modal micromodal-slide" id="loginModal" aria-hidden="true">
         <div class="login-modal-overlay" tabindex="-1" data-micromodal-close>
           <div class="login-modal-container" role="dialog" aria-modal="true" aria-labelledby="loginModal-title">
@@ -60,6 +60,7 @@
       <div class="slideshow-container">
         <div class="slide fade">
           <div class="slide-number">1 / 5</div>
+          <!-- IMPORT IMAGES -->
           <img class="slide-image" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1971&q=80" alt="Tokyo Image">
           <div class="slide-caption">Tokyo, Japan</div>
           <div class="starting-price">Starting from $1238</div>
@@ -90,7 +91,7 @@
         </div>
       </div>
     </section>
-    <section class="user-display hide">
+    <section id="userDisplay" class="user-display hide">
       <nav class="user-nav">
         <h2 class="user-nav-title">Trips</h2>
         <div class="button-group">
@@ -100,10 +101,10 @@
           <button class="present-trips-button">Present</button>
           <button class="all-trips-button">All</button>
         </div>
-        <h3 class="total-this-year">2021 Total Spent: $5500</h3>
+        <h3 id="totalThisYear" class="total-this-year">2021 Total Spent: $5500</h3>
       </nav>
-      <section class="user-display-grid">
-        <article class="trip-card">
+      <section id="userDisplayGrid" class="user-display-grid">
+        <!-- <article class="trip-card">
           <div class="trip-preview">
             <img class="trip-image" src="https://images.unsplash.com/photo-1442483221814-59f7d8b22739?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="Wellington">
           </div>
@@ -150,13 +151,13 @@
             <p class="trip-status">Approved</p>
             <p class="trip-cost">$2250</p>
           </div>
-        </article>
+        </article> -->
       </section>
     </section>
-    <section class="new-trip-page hide">
+    <section id="newTripPage" class="new-trip-page hide">
       <h3 class="new-trip-title">New Trip</h3>
       <div class="new-trip-box">
-        <form class="new-trip-form">
+        <form id="newTripForm" class="new-trip-form">
           <div class="form-selections">
             <div class="form-left">
               <label for "cars">Where to?</label>
@@ -179,6 +180,18 @@
           </div>
           <input type="submit" value="Submit Trip Request"/>
         </form>
+        <section id="tripEstimateCard" class="trip-estimate-card hide">
+          <h3 id="tripEstimateDestination" class="trip-estimate-destination">Destination</h3>
+          <p id="tripEstimateDate" class="trip-estimate">Estimate</p>
+          <p id="tripEstimateDuration" class="trip-estimate">Duration</p>
+          <p id="tripEstimateTravelers" class="trip-estimate">Travelers</p>
+          <p id="tripEstimateCost" class="trip-estimate">Cost</p>
+          <p id="newTripError" class="new-trip-error"></p>
+          <div class="confirm-cancel-trip">
+            <button id="cancelTrip" class="cancel-trip" type="button">Cancel</button>
+            <button id="confirmTrip" class="confirm-trip" type="button">Confirm</button>
+          </div>
+        </section>
       </div>
     </section>
   </main>
