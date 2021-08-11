@@ -1,0 +1,31 @@
+@media screen and (max-width: 1250px) {
+
+  .user-display-grid {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media screen and (max-width: 950px) {
+
+  .user-display-grid {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media screen and (max-width: 640px) {
+
+  .user-display-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .trip-card {
+    width: 85vw;
+    height: 30em;
+  }
+
+  .button-group {
+    display: none!important;
+  }
+}
