@@ -23,10 +23,19 @@ const tripEstimateTravelers = document.getElementById("tripEstimateTravelers");
 const tripEstimateCost = document.getElementById("tripEstimateCost");
 const cancelTrip = document.getElementById("cancelTrip");
 const confirmTrip = document.getElementById("confirmTrip");
+const tripError = document.getElementById("newTripError");
 
 const domUpdateFunctions = {
+  
   clearError: () => {
     loginError.innerText = "";
+    tripError.innerText = "";
+  },
+
+  displayError: (error) => {
+    console.log(error)
+    tripError.innerText = "Trip Request timed out. Please try again.";
+    setTimeout(domUpdateFunctions.clearError, 5000);
   },
 
   toggleUserDefaultPage: () => {
@@ -135,11 +144,11 @@ const domUpdateFunctions = {
       domUpdateFunctions.hideShowFormEstimate();
     }
     confirmTrip.onclick = () => {
-      postNewTrip(trip);
-      domUpdateFunctions.showAllTripsPage();
-      if(postNewTrip(trip)) {
-        domUpdateFunctions.renderNewTripCard(trip, total, destObj)
-      }
+      postNewTrip(trip, total, destObj);
+
+      // if(postNewTrip(trip)) {
+      //   domUpdateFunctions.renderNewTripCard(trip, total, destObj)
+      // }
     }
   }
 }

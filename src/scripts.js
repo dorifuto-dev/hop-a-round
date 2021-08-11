@@ -21,6 +21,7 @@ let user;
 let userID;
 let allDestinationNames;
 let newID;
+let slideIndex = 0;
 
 window.addEventListener("load", () => {
   getDestinationsArray();
@@ -49,14 +50,11 @@ const checkHasNumber = (string) => {
 
 const getDestinationsArray = () => {
   fetchAPIData("destinations")
-    // .then(response => response.json())
     .then(data => allDestinationNames = data.destinations.map(destination => destination.destination))
-    // .then(data => console.log(allDestinationNames))
     .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
 
 newTripForm.addEventListener("submit", (event) => {
-  // getNewTripData(event);
   getTripDataLength(event);
 })
 
@@ -73,7 +71,6 @@ const getLoginData = (event) => {
   const formData = new FormData(event.target);
   const password = formData.get('password');
   const username = formData.get('username');
-  // let userID;
   if (checkHasNumber(username) && username.includes("traveler") && password === "travel") {
     userID = username.match(/\d+/g)[0];
     getUser(userID);
@@ -89,6 +86,7 @@ const getNewTripData = (event, newID) => {
   const formData = new FormData(event.target);
   const newTrip = {
     id: newID,
+    // id: 2,
     userID: JSON.parse(userID),
     destinationID: JSON.parse(formData.get("destination")),
     travelers: JSON.parse(formData.get("travelers")),
@@ -132,8 +130,6 @@ const getTripDestinations = (id, user) => {
 
 // SLIDESHOW
 
-let slideIndex = 0;
-
 const showSlides = () => {
   slides.forEach(slide => slide.style.display ="none")
   slideIndex++;
@@ -145,16 +141,3 @@ const showSlides = () => {
 }
 
 showSlides();
-// An example of how you tell webpack to use a CSS (SCSS) file
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-
-
-
-// After GETting data, store in global variables
-
-// (tripData [x],
-// destinationData [x] (needs to display list of destinations to choose),
-// traveler [x])
-
-// use day.js for date input
