@@ -154,7 +154,11 @@ main {
 .login-form {
   @include flex-column;
   align-items: left;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.login-submit {
+  margin-top: 2em;
 }
 
 @keyframes mmfadeIn {
