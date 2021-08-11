@@ -26,7 +26,7 @@ const confirmTrip = document.getElementById("confirmTrip");
 const tripError = document.getElementById("newTripError");
 
 const domUpdateFunctions = {
-  
+
   clearError: () => {
     loginError.innerText = "";
     tripError.innerText = "";
@@ -72,7 +72,7 @@ const domUpdateFunctions = {
   populateDestinationsArray: (destinationArr) => {
     destinationsList.innerHTML = "";
     let destinationHTML = "";
-    let id = 1
+    let id = 1;
     destinationArr.forEach(dest => {
       destinationHTML += `<option value=${id}>${dest}</option>`
       id++;
