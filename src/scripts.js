@@ -71,9 +71,11 @@ const getLoginData = (event) => {
   const formData = new FormData(event.target);
   const password = formData.get('password');
   const username = formData.get('username');
-  if (checkHasNumber(username) && username.includes("traveler") && password === "travel") {
-    userID = username.match(/\d+/g)[0];
-    getUser(userID);
+  const usernameArray = username.split(/(\d+)/);
+  // const usernameQuery = username.match(/\d+/g[1]);
+  console.log(usernameArray);
+  if (usernameArray[1] > 0 && usernameArray[1] <= 50 && usernameArray[0] === "traveler" && password === "travel") {
+    getUser(usernameArray[1]);
     domUpdateFunctions.toggleUserDefaultPage();
   } else {
     loginError.innerText = "Incorrect username or password. Please try again.";
