@@ -10,13 +10,12 @@ const dayjs = require("dayjs");
 MicroModal.init();
 
 const slides = document.querySelectorAll(".slide");
-const signOutBtn = document.getElementById("signOutBtn");
+const signOutText = document.getElementById("signOutText");
+const newTripText = document.getElementById("newTripText");
+const allTripsText = document.getElementById("allTripsText");
 const loginForm = document.getElementById("loginForm");
-const newTripBtn = document.getElementById("newTripBtn");
-const allTripsBtn = document.getElementById("allTripsBtn");
 const newTripForm = document.getElementById("newTripForm");
 
-let allTrips;
 let user;
 let userID;
 let allDestinationNames;
@@ -31,16 +30,16 @@ loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
 })
 
-signOutBtn.addEventListener("click", (event) => {
+signOutText.addEventListener("click", (event) => {
   domUpdateFunctions.backToMainPage();
   MicroModal.close();
 })
 
-newTripBtn.addEventListener("click", (event) => {
+newTripText.addEventListener("click", (event) => {
   domUpdateFunctions.showNewTripPage();
 })
 
-allTripsBtn.addEventListener("click", (event) => {
+allTripsText.addEventListener("click", (event) => {
   domUpdateFunctions.showAllTripsPage();
 })
 
@@ -72,8 +71,6 @@ const getLoginData = (event) => {
   const password = formData.get('password');
   const username = formData.get('username');
   const usernameArray = username.split(/(\d+)/);
-  // const usernameQuery = username.match(/\d+/g[1]);
-  console.log(usernameArray);
   if (usernameArray[1] > 0 && usernameArray[1] <= 50 && usernameArray[0] === "traveler" && password === "travel") {
     getUser(usernameArray[1]);
     domUpdateFunctions.toggleUserDefaultPage();
@@ -88,7 +85,6 @@ const getNewTripData = (event, newID) => {
   const formData = new FormData(event.target);
   const newTrip = {
     id: newID,
-    // id: 2,
     userID: JSON.parse(userID),
     destinationID: JSON.parse(formData.get("destination")),
     travelers: JSON.parse(formData.get("travelers")),
