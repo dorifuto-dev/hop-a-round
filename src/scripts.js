@@ -1,5 +1,7 @@
 import "./images/plane.svg";
 import "./css/base.scss";
+import "./css/_mediaquery.scss";
+// import "./css/mixins.scss";
 import MicroModal from "micromodal";
 import Traveler from "./Traveler";
 import Trip from "./Trip";
@@ -10,13 +12,12 @@ const dayjs = require("dayjs");
 MicroModal.init();
 
 const slides = document.querySelectorAll(".slide");
-const signOutBtn = document.getElementById("signOutBtn");
+const signOutText = document.getElementById("signOutText");
+const newTripText = document.getElementById("newTripText");
+const allTripsText = document.getElementById("allTripsText");
 const loginForm = document.getElementById("loginForm");
-const newTripBtn = document.getElementById("newTripBtn");
-const allTripsBtn = document.getElementById("allTripsBtn");
 const newTripForm = document.getElementById("newTripForm");
 
-let allTrips;
 let user;
 let userID;
 let allDestinationNames;
@@ -31,16 +32,16 @@ loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
 })
 
-signOutBtn.addEventListener("click", (event) => {
+signOutText.addEventListener("click", () => {
   domUpdateFunctions.backToMainPage();
   MicroModal.close();
 })
 
-newTripBtn.addEventListener("click", (event) => {
+newTripText.addEventListener("click", () => {
   domUpdateFunctions.showNewTripPage();
 })
 
-allTripsBtn.addEventListener("click", (event) => {
+allTripsText.addEventListener("click", () => {
   domUpdateFunctions.showAllTripsPage();
 })
 
@@ -53,6 +54,8 @@ const getDestinationsArray = () => {
     .then(data => allDestinationNames = data.destinations.map(destination => destination.destination))
     .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
+
+
 
 newTripForm.addEventListener("submit", (event) => {
   getTripDataLength(event);
@@ -71,9 +74,10 @@ const getLoginData = (event) => {
   const formData = new FormData(event.target);
   const password = formData.get('password');
   const username = formData.get('username');
-  if (checkHasNumber(username) && username.includes("traveler") && password === "travel") {
-    userID = username.match(/\d+/g)[0];
-    getUser(userID);
+  const usernameArray = username.split(/(\d+)/);
+  userID = usernameArray[1];
+  if (usernameArray[1] > 0 && usernameArray[1] <= 50 && usernameArray[0] === "traveler" && password === "travel") {
+    getUser(usernameArray[1]);
     domUpdateFunctions.toggleUserDefaultPage();
   } else {
     loginError.innerText = "Incorrect username or password. Please try again.";
@@ -86,7 +90,6 @@ const getNewTripData = (event, newID) => {
   const formData = new FormData(event.target);
   const newTrip = {
     id: newID,
-    // id: 2,
     userID: JSON.parse(userID),
     destinationID: JSON.parse(formData.get("destination")),
     travelers: JSON.parse(formData.get("travelers")),
@@ -131,7 +134,7 @@ const getTripDestinations = (id, user) => {
 // SLIDESHOW
 
 const showSlides = () => {
-  slides.forEach(slide => slide.style.display ="none")
+  slides.forEach(slide => slide.style.display = "none")
   slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1;

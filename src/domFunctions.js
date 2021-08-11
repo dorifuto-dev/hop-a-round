@@ -145,10 +145,6 @@ const domUpdateFunctions = {
     }
     confirmTrip.onclick = () => {
       postNewTrip(trip, total, destObj);
-
-      // if(postNewTrip(trip)) {
-      //   domUpdateFunctions.renderNewTripCard(trip, total, destObj)
-      // }
     }
   }
 }
