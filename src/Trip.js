@@ -16,8 +16,8 @@ class Trip {
   }
 
   calculateTotalFare() {
-    const totalLodging = this.destination.lodgingCost * this.duration * this.travelers;
-    const totalAirFare = this.destination.flightCost * this.travelers;
+    const totalLodging = this.destination.estimatedLodgingCostPerDay * this.duration * this.travelers;
+    const totalAirFare = this.destination.estimatedFlightCostPerPerson * this.travelers;
     return Math.round((totalLodging + totalAirFare) * 1.1);
   }
 }

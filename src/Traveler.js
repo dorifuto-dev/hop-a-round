@@ -4,27 +4,29 @@ class Traveler {
     this.name = data.name;
     this.type = data.travelerType;
     this.trips = [];
-    this.isLoggedIn = false;
+    // this.approvedTrips = [] || this.trips.filter(trip => trip.status === "approved");
+    // this.isLoggedIn = false;
   }
 
-  login(password) {
-    if (password === "travel" && this.isLoggedIn === false) {
-      this.isLoggedIn = true;
-      return true;
+  // login(password) {
+  //   if (password === "travel" && this.isLoggedIn === false) {
+  //     this.isLoggedIn = true;
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  // addTrip(trip) {
+  //   this.trips.push(trip);
+  // }
+
+  findTotalSpent(year) {
+    const tripsThisYear = this.trips.filter(trip => trip.date.includes(year) && trip.status === "approved");
+    if (tripsThisYear.length === 0) {
+      return 0;
     } else {
-      return false;
-    }
-  }
-
-  addTrip(trip) {
-    this.trips.push(trip);
-  }
-
-  findTotalSpent() {
-    if (this.trips.length === 0) {
-      return null;
-    } else {
-      return this.trips.reduce((accNum, trip) => {
+      return tripsThisYear.reduce((accNum, trip) => {
         accNum += trip.calculateTotalFare();
         return accNum;
       }, 0)

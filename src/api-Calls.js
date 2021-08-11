@@ -1,3 +1,5 @@
+import domUpdateFunctions from "./domFunctions";
+
 const fetchAPIData = (type, id) => {
   if (id) {
     return fetch(`http://localhost:3001/api/v1/${type}/${id}`)
@@ -10,21 +12,22 @@ const fetchAPIData = (type, id) => {
   }
 }
 
-const postNewTrip = (tripObject) => {
+const postNewTrip = (tripObject, tripTotal, destObj) => {
   fetch("http://localhost:3001/api/v1/trips", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(tripObject)
   })
-    .then(response => checkForError(response))
-    .catch(error => console.log(error))
+    .then(response => checkForError(response, tripObject, tripTotal, destObj))
+    .catch(error => domUpdateFunctions.displayError(error))
 }
 
-const checkForError = (response) => {
+const checkForError = (response, tripObject, tripTotal, destObj) => {
   if (!response.ok) {
-    error.forEach(error => error.innerText = "Please make sure that all fields are filled out.");
     throw new Error("Please make sure that all fields are filled out.");
   } else {
+    domUpdateFunctions.showAllTripsPage();
+    domUpdateFunctions.renderNewTripCard(tripObject, tripTotal, destObj)
     return response.json()
   }
 }
