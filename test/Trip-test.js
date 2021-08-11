@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import Trip from '../src/Trip';
-import Destination from '../src/Destination';
 const tripData = require('../src/data/tripTestData');
 const destinationData = require('../src/data/destinationTestData');
 
@@ -15,8 +14,8 @@ describe('Trip', () => {
     trip = new Trip(tripData[0]);
     trip2 = new Trip(tripData[1]);
     trip3 = new Trip(tripData[2]);
-    location = new Destination(destinationData[0]);
-    location2 = new Destination(destinationData[1]);
+    location = destinationData[0];
+    location2 = destinationData[1];
     trip2.destination = location;
   });
 

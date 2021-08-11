@@ -4,22 +4,7 @@ class Traveler {
     this.name = data.name;
     this.type = data.travelerType;
     this.trips = [];
-    // this.approvedTrips = [] || this.trips.filter(trip => trip.status === "approved");
-    // this.isLoggedIn = false;
   }
-
-  // login(password) {
-  //   if (password === "travel" && this.isLoggedIn === false) {
-  //     this.isLoggedIn = true;
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // addTrip(trip) {
-  //   this.trips.push(trip);
-  // }
 
   findTotalSpent(year) {
     const tripsThisYear = this.trips.filter(trip => trip.date.includes(year) && trip.status === "approved");
@@ -39,7 +24,3 @@ class Traveler {
 }
 
 export default Traveler;
-
-// constructor(allTripData, travelerInfo)
-// this.allTrips = allTripData.filter(trip => trip.userID === this.id)
-// this.findPastTrips()

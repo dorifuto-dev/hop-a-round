@@ -1,4 +1,9 @@
 import "./images/plane.svg";
+import "./images/tokyo.jpeg";
+// import "./images/lima.jpeg";
+// import "./images/miami.jpeg";
+// import "./images/rome.jpeg";
+// import "./images/tulum.jpeg";
 import "./css/base.scss";
 import MicroModal from "micromodal";
 import Traveler from "./Traveler";

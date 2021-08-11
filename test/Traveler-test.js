@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import Traveler from '../src/Traveler';
 import Trip from '../src/Trip';
-import Destination from '../src/Destination';
 const userData = require('../src/data/travelerTestData');
 const tripData = require('../src/data/tripTestData');
 const destinationData = require('../src/data/destinationTestData');
@@ -16,8 +15,8 @@ describe('Traveler', () => {
     traveler = new Traveler(userData[0]);
     traveler2 = new Traveler(userData[1]);
     trip = new Trip(tripData[0]);
-    destination = new Destination(destinationData[0]);
-    trip.updateDestination(destination);
+    destination = destinationData[0];
+    trip.destination = destination;
   });
 
   it('Should be a function', () => {
@@ -44,33 +43,13 @@ describe('Traveler', () => {
     expect(traveler.trips).to.deep.equal([]);
   });
 
-  // it('Should have a property isLoggedIn which defaults to false', () => {
-  //   expect(traveler.isLoggedIn).to.equal(false);
-  // });
+  it('Should be able to find the total amount spent on trips each year', () => {
+    const total1 = traveler.findTotalSpent("2021");
+    expect(total1).to.equal(0);
 
-  // it('Should be able to log in', () => {
-  //   expect(traveler.login('travel')).to.equal(true);
-  //   expect(traveler.isLoggedIn).to.equal(true);
-  //
-  //   expect(traveler2.login('manatee')).to.equal(false);
-  //   expect(traveler2.isLoggedIn).to.equal(false);
-  // });
+    traveler.trips.push(trip);
 
-  // it('Should be able to update it\'s list of trips', () => {
-  //   traveler.addTrip(trip);
-  //
-  //   expect(traveler.trips.length).to.equal(1);
-  //   expect(traveler.trips).to.deep.equal([trip]);
-  // });
-
-  it('Should be able to find the total amount spent on trips', () => {
-    const total1 = traveler.findTotalSpent();
-
-    traveler.addTrip(trip);
-
-    const total2 = traveler.findTotalSpent();
-
-    expect(total1).to.equal(null);
+    const total2 = traveler.findTotalSpent("2022");
     expect(total2).to.equal(1056);
   });
 
