@@ -33,7 +33,7 @@
     </ul>
   </nav>
   <main>
-    <section id="defaultDisplay" class="default-display">
+    <section id="defaultDisplay" class="default-display hide">
       <div class="login-modal micromodal-slide" id="loginModal" aria-hidden="true">
         <div class="login-modal-overlay" tabindex="-1" data-micromodal-close>
           <div class="login-modal-container" role="dialog" aria-modal="true" aria-labelledby="loginModal-title">
@@ -60,8 +60,7 @@
       <div class="slideshow-container">
         <div class="slide fade">
           <div class="slide-number">1 / 5</div>
-          <!-- IMPORT IMAGES -->
-          <img class="slide-image" src="./images/tokyo.jpeg" alt="Tokyo Image">
+          <img class="slide-image" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1971&q=80" alt="Tokyo Image">
           <div class="slide-caption">Tokyo, Japan</div>
           <div class="starting-price">Starting from $1238</div>
         </div>
@@ -91,7 +90,7 @@
         </div>
       </div>
     </section>
-    <section id="userDisplay" class="user-display hide">
+    <section id="userDisplay" class="user-display">
       <nav class="user-nav">
         <h2 class="user-nav-title">Trips</h2>
         <div class="button-group">
@@ -158,25 +157,27 @@
       <h3 class="new-trip-title">New Trip</h3>
       <div class="new-trip-box">
         <form id="newTripForm" class="new-trip-form">
-          <div class="form-selections">
-            <div class="form-left">
-              <label for "cars">Where to?</label>
-              <select id="destinations" name="destination" required>
-                <option value="Tokyo, Japan">Tokyo, Japan</option>
-                <option value="Lima, Peru">Lima, Peru</option>
-                <option value="Rome, Italy">Rome, Italy</option>
-                <option value="Miami, Florida">Miami, Florida</option>
-                <option value="Tulum, Mexico">Tulum, Mexico</option>
-              </select>
-              <label for "departure-date">When?</label>
-              <input name="departure-date" type="date" id="departureDate" required>
-            </div>
-            <div class="form-right">
-              <label for "duration">How many days?</label>
-              <input name="duration" type="number" min="0" placeholder="0" required>
-              <label for "travelers">How many travelers?</label>
-              <input name="travelers" type="number" min="0" placeholder="0" required>
-            </div>
+          <div class="label-flex">
+            <label for "cars">Where to?</label>
+            <select id="destinations" name="destination" required>
+              <option value="Tokyo, Japan">Tokyo, Japan</option>
+              <option value="Lima, Peru">Lima, Peru</option>
+              <option value="Rome, Italy">Rome, Italy</option>
+              <option value="Miami, Florida">Miami, Florida</option>
+              <option value="Tulum, Mexico">Tulum, Mexico</option>
+            </select>
+          </div>
+          <div class="label-flex">
+            <label for "departure-date">When?</label>
+            <input name="departure-date" type="date" id="departureDate" required>
+          </div>
+          <div class="label-flex">
+            <label for "duration">How many days?</label>
+            <input name="duration" type="number" min="0" placeholder="0" required>
+          </div>
+          <div class="label-flex">
+            <label for "travelers">How many travelers?</label>
+            <input name="travelers" type="number" min="0" placeholder="0" required>
           </div>
           <input type="submit" value="Submit Trip Request"/>
         </form>

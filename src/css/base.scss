@@ -320,8 +320,8 @@ main {
 .trip-info {
   @include flex-column;
   height: 60%;
-  margin-left: 5px;
-  justify-content: space-between;
+  margin-left: 1em;
+  justify-content: space-around;
 }
 
 // *********************NEW TRIP PAGE***************************
@@ -348,12 +348,8 @@ main {
   height: 100%;
 }
 
-.form-selections {
-  display: flex;
-}
-
-.form-left, .form-right {
-  @include flex-column-center;
+input {
+  cursor: pointer;
 }
 
 .trip-estimate-card {
