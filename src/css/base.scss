@@ -12,8 +12,19 @@
   flex-direction: column;
 }
 
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+$dark-primary: #0288D1;
+$light-primary: #B3E5FC;
+$white: #FFFFFF;
+$primary-font: 'Open Sans', sans-serif;
+$logo-font: 'Aleo', serif;
+
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $primary-font;
 }
 
 *,
@@ -28,7 +39,7 @@
 
 .top-menu {
   height: 100px;
-  background-color: #0288D1;
+  background-color: $dark-primary;
   display: flex;
 }
 
@@ -45,8 +56,8 @@
 }
 
 .logo-hop-a-round {
-  font-family: 'Aleo', serif;
-  color: #ffffff;
+  font-family: $logo-font;
+  color: $white;
 }
 
 .user-menu {
@@ -65,7 +76,7 @@
   margin-top: auto;
   margin-bottom: 10px;
   cursor: pointer;
-  color: #ffffff;
+  color: $white;
 }
 
 .hide {
@@ -73,7 +84,7 @@
 }
 
 main {
-  background-color: #B3E5FC;
+  background-color: $light-primary;
   height: 90vh;
   overflow: auto;
 }
@@ -89,15 +100,14 @@ main {
 }
 
 .login-modal-overlay {
+  @include flex-align-center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0,0,0,0.6);
-  display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .login-modal-container {
@@ -111,9 +121,8 @@ main {
 }
 
 .login-modal-header {
-  display: flex;
+  @include flex-align-center;
   justify-content: space-between;
-  align-items: center;
 }
 
 .login-modal-title {
@@ -169,7 +178,6 @@ main {
 
 .micromodal-slide {
   display: none;
-
 }
 
 .micromodal-slide.is-open {
@@ -373,12 +381,12 @@ input {
     padding: 10px 25px;
     border-radius: 3px;
     border: 1px solid black;
-    color: #ffffff;
+    color: $white;
   }
   .cancel-trip {
     background-color: #757575;
   }
   .confirm-trip {
-    background-color: #0288D1;
+    background-color: $dark-primary;
   }
 }
