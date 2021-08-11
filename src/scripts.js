@@ -1,6 +1,7 @@
 import "./images/plane.svg";
 import "./css/base.scss";
 import "./css/_mediaquery.scss";
+// import "./css/mixins.scss";
 import MicroModal from "micromodal";
 import Traveler from "./Traveler";
 import Trip from "./Trip";
@@ -31,16 +32,16 @@ loginForm.addEventListener("submit", (event) => {
   getLoginData(event);
 })
 
-signOutText.addEventListener("click", (event) => {
+signOutText.addEventListener("click", () => {
   domUpdateFunctions.backToMainPage();
   MicroModal.close();
 })
 
-newTripText.addEventListener("click", (event) => {
+newTripText.addEventListener("click", () => {
   domUpdateFunctions.showNewTripPage();
 })
 
-allTripsText.addEventListener("click", (event) => {
+allTripsText.addEventListener("click", () => {
   domUpdateFunctions.showAllTripsPage();
 })
 
@@ -53,6 +54,8 @@ const getDestinationsArray = () => {
     .then(data => allDestinationNames = data.destinations.map(destination => destination.destination))
     .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
+
+
 
 newTripForm.addEventListener("submit", (event) => {
   getTripDataLength(event);
@@ -72,6 +75,7 @@ const getLoginData = (event) => {
   const password = formData.get('password');
   const username = formData.get('username');
   const usernameArray = username.split(/(\d+)/);
+  userID = usernameArray[1];
   if (usernameArray[1] > 0 && usernameArray[1] <= 50 && usernameArray[0] === "traveler" && password === "travel") {
     getUser(usernameArray[1]);
     domUpdateFunctions.toggleUserDefaultPage();
@@ -130,7 +134,7 @@ const getTripDestinations = (id, user) => {
 // SLIDESHOW
 
 const showSlides = () => {
-  slides.forEach(slide => slide.style.display ="none")
+  slides.forEach(slide => slide.style.display = "none")
   slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1;

@@ -17,6 +17,7 @@
   align-items: center;
 }
 
+
 $dark-primary: #0288D1;
 $light-primary: #B3E5FC;
 $white: #FFFFFF;
@@ -38,7 +39,7 @@ $logo-font: 'Aleo', serif;
 // *********************NAV BAR***************************
 
 .top-menu {
-  height: 100px;
+  height: 7em;
   background-color: $dark-primary;
   display: flex;
 }
@@ -354,6 +355,7 @@ main {
   @include flex-column-center;
   justify-content: space-around;
   height: 100%;
+  width: 100%;
 }
 
 input {

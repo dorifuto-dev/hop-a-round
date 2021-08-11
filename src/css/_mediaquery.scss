@@ -3,12 +3,20 @@
   .user-display-grid {
     grid-template-columns: repeat(3, auto);
   }
+
+  .new-trip-box {
+    width: 50vw;
+  }
 }
 
 @media screen and (max-width: 950px) {
 
   .user-display-grid {
     grid-template-columns: repeat(2, auto);
+  }
+
+  .new-trip-box {
+    width: 70vw;
   }
 }
 
@@ -27,5 +35,9 @@
 
   .button-group {
     display: none!important;
+  }
+
+  .new-trip-box {
+    width: 90vw;
   }
 }
