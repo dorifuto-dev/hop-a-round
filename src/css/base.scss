@@ -86,7 +86,7 @@ $logo-font: 'Aleo', serif;
 
 main {
   background-color: $light-primary;
-  height: 90vh;
+  height: 88vh;
   overflow: auto;
 }
 
@@ -154,7 +154,14 @@ main {
 .login-form {
   @include flex-column;
   align-items: left;
-  justify-content: space-between;
+  justify-content: space-around;
+  input {
+    border: 1px solid black;
+  }
+}
+
+.login-submit {
+  margin-top: 2em;
 }
 
 @keyframes mmfadeIn {
@@ -227,7 +234,7 @@ main {
 
 .slide-image {
   width: 100vw;
-  height: 45em;
+  height: 80vh;
   object-fit: cover;
   opacity: 70%;
 }

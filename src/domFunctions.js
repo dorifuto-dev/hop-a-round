@@ -48,6 +48,10 @@ const domUpdateFunctions = {
   },
 
   showNewTripPage: () => {
+    if (!tripEstimateCard.classList.contains("hide")) {
+      tripEstimateCard.classList.add("hide");
+      newTripForm.classList.remove("hide");
+    }
     newTripPage.classList.remove("hide");
     userDisplay.classList.add("hide");
   },
