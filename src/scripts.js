@@ -1,7 +1,6 @@
 import "./images/plane.svg";
 import "./css/base.scss";
 import "./css/_mediaquery.scss";
-// import "./css/mixins.scss";
 import MicroModal from "micromodal";
 import Traveler from "./Traveler";
 import Trip from "./Trip";
@@ -45,21 +44,15 @@ allTripsText.addEventListener("click", () => {
   domUpdateFunctions.showAllTripsPage();
 })
 
-const checkHasNumber = (string) => {
-  return /\d/.test(string);
-}
+newTripForm.addEventListener("submit", (event) => {
+  getTripDataLength(event);
+})
 
 const getDestinationsArray = () => {
   fetchAPIData("destinations")
     .then(data => allDestinationNames = data.destinations.map(destination => destination.destination))
     .then(data => domUpdateFunctions.populateDestinationsArray(allDestinationNames));
 }
-
-
-
-newTripForm.addEventListener("submit", (event) => {
-  getTripDataLength(event);
-})
 
 const getTripDataLength = (event) => {
   event.preventDefault();
